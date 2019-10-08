@@ -1,13 +1,14 @@
 <template>
   <div>
     <!-- 顶部导航 -->
-    <mt-header fixed :title="title"></mt-header>
+    <!-- <mt-header fixed :title="title"></mt-header> -->
 
     <!-- 中间部分 -->
     <div class="content">
-      <router-view></router-view>
+      <transition name='app-router' mode='out-in'>
+        <router-view></router-view>
+      </transition>
     </div>
-    
 
     <!--底部导航-->
     <mt-tabbar v-model="selected">
@@ -24,6 +25,7 @@
   </div>
 </template>
 <script>
+import {isNotBlank} from "./utils/commen-util"
 export default {
   data() {
     return {
@@ -48,13 +50,32 @@ export default {
       } else if (newVal == "mine") {
         this.$router.push({ path: "./mine" });
       }
+    },
+    $router(newVal){
+      if(isNotBlank(newVal.meta.title)){
+        this.title=newVal.meta.title
+      }
     }
   }
 };
 </script>
 <style lang="less" scoped>
 .content {
-  margin-top: 40px;
+  width: 100%;
+  overflow-x: hidden;
+  height: calc(100vh - 50px);
+}
+.app-router-enter,
+.app-router-leave-to{
+  opacity: 0;
+  transform: translateX(100%)
+}
+.app-router-leave-to{
+  transform: translateX(-100%)
+}
+.app-router-enter-active,
+.app-router-leave-active{
+  transition: all .4s ease
 }
 </style>
 

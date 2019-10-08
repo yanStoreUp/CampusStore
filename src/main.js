@@ -18,6 +18,12 @@ import './assets/font/iconfont.css'
 //引入main.css
 import './main.css'
 
+// 引入swiper
+// import { Swipe, SwipeItem } from 'mint-ui';
+
+// Vue.component(Swipe.name, Swipe);
+// Vue.component(SwipeItem.name, SwipeItem);
+
 Vue.use(VueRouter)
 
 Vue.use(MintUI)
