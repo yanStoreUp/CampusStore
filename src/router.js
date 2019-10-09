@@ -1,44 +1,60 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import sort from './views/sort/Sort.vue'
 import Mine from './views/mine/Mine.vue'
+
 import Register from './views/mine/Register.vue'
 import Enroll from './views/mine/Enroll.vue'
+import Sort from './views/sort/Sort'
 
 
-Vue.use(Router)
+// import goodsClassify from './views/goodsClassify/GoodsClassify.vue'
+import HomePage from './views/homePage/HomePage.vue'
+import ShopCar from './views/shopCar/ShopCar.vue'
+import VueRouter from 'vue-router';
 
-export default new Router({
-  mode: 'history',
-  base: process.env.BASE_URL,
-  routes: [
-    {
-      path: '/',
-      name: 'Mine',
-      component: Mine
+const router = new VueRouter({
+  // mode: 'history',
+  // base: process.env.BASE_URL,
+  routes: [{
+    path: '/',
+    redirect: '/HomePage'
+  }, {
+    path: '/homePage',
+    component: HomePage,
+    meta: {
+      title: '首页'
+    }
+  }, {
+    path: '/sort',
+    component: Sort,
+    meta: {
+      title: '商品分类'
+    }
+  }, {
+    path: '/shopCar',
+    component: ShopCar,
+    meta: {
+      title: '购物车'
+    }
+  }, {
+    path: '/mine',
+    component: Mine,
+    meta: {
+      title: '我的'
     },
-    {
-      path: '/register',
-      name: 'Register',
-      component: Register
-    },
-    // {
-    //   path: '/about',
-    //   name: 'about',
-    //   // route level code-splitting
-    //   // this generates a separate chunk (about.[hash].js) for this route
-    //   // which is lazy-loaded when the route is visited.
-    //   component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
-    // },
-    {
-      path: '/about',
-      component: sort
-    },
-    {
-      path: '/enroll',
-      name: 'Enroll',
-      component: Enroll
-    },
-    
-  ]
+    children: [{
+        path: 'register',
+        component: Register,
+        meta: {
+          title: '登录'
+        }
+      },
+      {
+        path: 'enroll',
+        component: Enroll,
+        meta: {
+          title: '注册'
+        }
+      }
+    ]
+  }]
 })
+export default router

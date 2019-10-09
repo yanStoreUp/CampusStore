@@ -1,0 +1,30 @@
+{
+  "id": "1447552",
+  "name": "schoolStore",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "1638357",
+      "name": "首页",
+      "font_class": "shouye",
+      "unicode": "e615",
+      "unicode_decimal": 58901
+    },
+    {
+      "icon_id": "2273360",
+      "name": "照相机",
+      "font_class": "shumajiadian",
+      "unicode": "e689",
+      "unicode_decimal": 59017
+    },
+    {
+      "icon_id": "3670102",
+      "name": "搜索",
+      "font_class": "tubiaolunkuo-",
+      "unicode": "e609",
+      "unicode_decimal": 58889
+    }
+  ]
+}
