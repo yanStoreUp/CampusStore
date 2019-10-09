@@ -7,11 +7,16 @@
       <li @click="sortArr('d')">d</li>
       <!-- <li @click="sortArr(x)" v-for="x in 26" :key="x">{{x}}</li> -->
     </div>
-    <div>
-      <div>分类</div>
       <div id="right">
-        <div class="goodsList" v-for="value in goodsArr" :key="value">{{value}}</div>
+        <div class="goodsSort">分类</div>
+        <div class="goodsList">1</div>
+        <div class="goodsList">1</div>
+        <div class="goodsList">1</div>
+        <div class="goodsList">1</div>
       </div>
+      <div id="right">
+        <div class="goodsSort">分类</div>
+        <div class="goodsList" v-for="value in goodsArr" :key="value">{{value}}</div>
     </div>
   </div>
 </template>
@@ -27,9 +32,7 @@ export default {
   },
   created() {
     sort().then(res => {
-      // console.log(res.data.cities[0].nm)
       this.sortLeftData = res.data.cities;
-      console.log(this.sortLeftData);
     });
   },
   methods: {
@@ -45,7 +48,6 @@ export default {
         }
       });
       this.goodsArr = goodsObj[x];
-      console.log(this.goodsArr);
     }
   }
 };
@@ -55,9 +57,6 @@ export default {
 * {
   list-style: none;
 }
-#box {
-  position: relative;
-}
 #left {
   float: left;
   // height: 500px;
@@ -65,18 +64,21 @@ export default {
   background-color: skyblue;
 }
 #right {
-  position: absolute;
   //   height: 500px;
   width: calc(100vw - 100px);
   margin-left: 100px;
   background-color: tomato;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   flex-wrap: wrap;
-  .goodsSort {
+  flex-direction:row;
+  .goodsSort{
+    width: 100%;
+    height: 30px;
+    background-color: white;
   }
   .goodsList {
-    margin: 5px 5px 0px 0px;
+    margin: 15px 5px 5px 5px;
     width: 30vw;
     height: 20vh;
     background-color: orange;
