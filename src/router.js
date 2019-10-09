@@ -1,7 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from './views/Home.vue'
 import sort from './views/sort/Sort.vue'
+import Mine from './views/mine/Mine.vue'
+import Register from './views/mine/Register.vue'
+import Enroll from './views/mine/Enroll.vue'
+
 
 Vue.use(Router)
 
@@ -11,8 +14,13 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: Home
+      name: 'Mine',
+      component: Mine
+    },
+    {
+      path: '/register',
+      name: 'Register',
+      component: Register
     },
     // {
     //   path: '/about',
@@ -26,5 +34,11 @@ export default new Router({
       path: '/about',
       component: sort
     },
+    {
+      path: '/enroll',
+      name: 'Enroll',
+      component: Enroll
+    },
+    
   ]
 })
