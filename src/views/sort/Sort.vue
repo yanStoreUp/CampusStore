@@ -7,8 +7,11 @@
       <li @click="sortArr('d')">d</li>
       <!-- <li @click="sortArr(x)" v-for="x in 26" :key="x">{{x}}</li> -->
     </div>
-    <div id="right">
-      <div class="goodsList" v-for="value in goodsArr" :key="value">{{value}}</div>
+    <div>
+      <div>分类</div>
+      <div id="right">
+        <div class="goodsList" v-for="value in goodsArr" :key="value">{{value}}</div>
+      </div>
     </div>
   </div>
 </template>
@@ -42,6 +45,7 @@ export default {
         }
       });
       this.goodsArr = goodsObj[x];
+      console.log(this.goodsArr);
     }
   }
 };
@@ -62,17 +66,19 @@ export default {
 }
 #right {
   position: absolute;
-//   height: 500px;
+  //   height: 500px;
   width: calc(100vw - 100px);
   margin-left: 100px;
   background-color: tomato;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   flex-wrap: wrap;
+  .goodsSort {
+  }
   .goodsList {
     margin: 5px 5px 0px 0px;
-    width: 20vw;
-    height: 8vh;
+    width: 30vw;
+    height: 20vh;
     background-color: orange;
     border-radius: 10px;
   }

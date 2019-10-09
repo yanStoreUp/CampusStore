@@ -35,20 +35,20 @@ export default {
   },
   created() {
     if (
-      this.$router.path == "./goodsClassify" &&
-      this.$router.path != "./goodsClassify"
+      this.$router.path == "/goodsClassify" &&
+      this.$router.path != "/goodsClassify"
     ) {
       this.selected = "goodsClassify";
-    } else if (this.$router.path == "./mine" && this.$router.path != "./mine") {
+    } else if (this.$router.path == "/mine" && this.$router.path != "/mine") {
       this.selected = "mine";
     }
   },
   watch: {
     selected(newVal) {
       if (newVal == "goodsClassify") {
-        this.$router.push({ path: "./goodsClassify" });
+        this.$router.push({ path: "/goodsClassify" });
       } else if (newVal == "mine") {
-        this.$router.push({ path: "./mine" });
+        this.$router.push({ path: "/mine" });
       }
     },
     $router(newVal){

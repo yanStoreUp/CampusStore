@@ -1,13 +1,11 @@
-import Vue from 'vue'
 import Router from 'vue-router'
 import Mine from './views/mine/Mine.vue'
 import Register from './views/mine/Register.vue'
 import Enroll from './views/mine/Enroll.vue'
+import Sort from './views/sort/Sort'
 
 
 import goodsClassify from './views/goodsClassify/GoodsClassify.vue'
-import mine from './views/mine/Mine.vue'
-import VueRouter from 'vue-router';
 
 export default new Router({
   mode: 'history',
@@ -38,6 +36,11 @@ export default new Router({
       path: '/enroll',
       name: 'Enroll',
       component: Enroll
+    },
+    {
+      path: '/sort',
+      name: 'sort',
+      component: Sort
     },
     
   ]
