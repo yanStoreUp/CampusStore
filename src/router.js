@@ -1,8 +1,8 @@
 
+import Sort from './views/sort/Sort'
 
 import HomePage from './views/homePage/HomePage.vue'
 import ShopCar from './views/shopCar/ShopCar.vue'
-import Sort from './views/sort/Sort.vue'
 import VueRouter from 'vue-router';
 
 
