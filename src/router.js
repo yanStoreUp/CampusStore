@@ -1,3 +1,6 @@
+
+
+
 import HomePage from './views/homePage/HomePage.vue'
 import ShopCar from './views/shopCar/ShopCar.vue'
 import Mine from './views/mine/Mine.vue'
