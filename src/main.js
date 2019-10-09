@@ -18,6 +18,10 @@ import './assets/font/iconfont.css'
 //引入main.css
 import './main.css'
 
+//引入element-ui
+import Element from 'element-ui';
+Vue.use(Element, { size: 'small', zIndex: 3000 });
+
 // 引入swiper
 // import { Swipe, SwipeItem } from 'mint-ui';
 
