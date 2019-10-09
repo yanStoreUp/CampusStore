@@ -25,7 +25,7 @@
   </div>
 </template>
 <script>
-import {isNotBlank} from "./utils/commen-util"
+
 export default {
   data() {
     return {
@@ -96,5 +96,5 @@ export default {
                 color: #42b983;
             }
         }
-    }
+    }}
 </style>
