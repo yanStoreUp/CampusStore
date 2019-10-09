@@ -76,7 +76,7 @@ export default {
 .content {
   width: 100%;
   overflow-x: hidden;
-  height: calc(100vh - 50px);
+  height: calc(100vh - 55px);
 }
 .app-router-enter,
 .app-router-leave-to {
