@@ -1,21 +1,37 @@
 import Vue from 'vue'
-import App from './App.vue'
+import app from './App.vue'
 import router from './router'
 import store from './store'
-import VueRouter from 'vue-router';
 
-import mintUI from 'mint-ui';
+
+
+//引入路由
+import VueRouter from 'vue-router'
+
+//引入mint-ui
+import MintUI from 'mint-ui'
 import 'mint-ui/lib/style.css'
 
-Vue.config.productionTip = false
+//引入图标
+import './assets/font/iconfont.css'
 
+//引入main.css
+import './main.css'
 
-// 安装路由
+// 引入swiper
+// import { Swipe, SwipeItem } from 'mint-ui';
+
+// Vue.component(Swipe.name, Swipe);
+// Vue.component(SwipeItem.name, SwipeItem);
+
 Vue.use(VueRouter)
-Vue.use(mintUI)
 
-new Vue({
+Vue.use(MintUI)
+
+
+var vm = new Vue({
+  el: '#app',
   router,
   store,
-  render: h => h(App)
-}).$mount('#app')
+  render: c => c(app)
+})

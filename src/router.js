@@ -7,16 +7,23 @@ import Home from './views/Home.vue'
 import sort from './views/sort/Sort.vue'
 
 
-Vue.use(Router)
+import goodsClassify from './views/goodsClassify/GoodsClassify.vue'
+import mine from './views/mine/Mine.vue'
+import VueRouter from 'vue-router';
 
 export default new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [{
       path: '/',
-      name: 'Mine',
-      component: Mine
-    },
+      redirect: '/goodsClassify'
+  },{
+      path: '/goodsClassify',
+      component: goodsClassify,
+      meta: {
+          title: '首页'
+      }
+  },
     {
       path: '/register',
       name: 'Register',
