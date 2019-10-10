@@ -2,9 +2,10 @@
   <div>
     <!-- 顶部导航 -->
     <!-- <mt-header fixed :title="title"></mt-header> -->
+    
 
     <!-- 中间部分 -->
-    <div class="content">
+    <div class="main">
       <transition name="app-router" mode="out-in">
         <router-view></router-view>
       </transition>
@@ -74,10 +75,10 @@ export default {
 };
 </script>
 <style lang="less" scoped>
-.content {
+.main {
   width: 100%;
   overflow-x: hidden;
-  height: calc(100vh - 55px);
+  height: calc(100vh - 55px);    //减去底部的高度
 }
 .app-router-enter,
 .app-router-leave-to {

@@ -1,6 +1,6 @@
 <template>
 <div>
-<mt-header fixed title="我的">
+<mt-header fixed title="登录" id="subject">
 
 <router-link to="/" slot="left">
     <mt-button icon="back">返回</mt-button>
@@ -22,6 +22,10 @@
             <el-form-item>
                 <el-button type="primary" icon="el-icon-upload" @click="login">登录</el-button>
             </el-form-item>
+
+            <router-link to="/enroll"><mt-button type="default" id="logon">重新注册</mt-button></router-link>
+
+
         </el-form>
     </el-row>
     </div>
@@ -74,6 +78,10 @@
  
 
 <style lang="less" >
+#subject {
+    background-color: #EA5F5A;
+}
+
 .box {
     margin-top:40px; 
     .logo {
@@ -81,7 +89,10 @@
       height: 200px;
       background-color: red;
       margin: 20px auto;
-
+    }
+    #logon {
+      width: 80%;
+      margin: 30px 10%;
     }
   }
 </style>

@@ -1,7 +1,7 @@
 <template>
 
 <div>
-<mt-header fixed title="我的">
+<mt-header fixed title="我的" id="subject">
 
 <router-link to="/" slot="left">
     <mt-button icon="back">返回</mt-button>
@@ -107,6 +107,9 @@
 // body {
 //     background-image: url("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1570619519934&di=951ac4c170dfe05b759e99b3fb501608&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fblog%2F201409%2F14%2F20140914005104_TsBrF.jpeg")
 // }
+#subject {
+    background-color: #EA5F5A;
+}
 
 
 .box {
@@ -132,8 +135,8 @@
   }
 
   .logon {
-    width: 90%;
-    margin: 0px 5%;
+    width: 80%;
+    margin: 10px 10%;
   }
   .Hbut {
       border: none;

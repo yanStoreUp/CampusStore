@@ -5,7 +5,7 @@ module.exports = {
         hot: true,
         proxy: {
             '/api': {
-                target: 'http://39.97.33.178',
+                target: 'http://59.111.92.205:8088',
                 changeOrgin: true
             }
         }
