@@ -39,7 +39,6 @@ export default {
     sortArr(x) {
       this.goodsArr = {};
       var goodsObj = new Object();
-      var str = "shanghai";
       this.sortLeftData.forEach(v => {
         if (goodsObj[v.py.charAt(0)]) {
           goodsObj[v.py.charAt(0)].push(v.nm);
