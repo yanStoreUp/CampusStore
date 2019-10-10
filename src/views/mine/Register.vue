@@ -1,81 +1,87 @@
-
 <template>
-  <div>
-    <form v-if="!isReg">
-      <div>用户名:</div>
-      <input type="text" v-model="name">
-      <div>密码:</div>
-      <input type="password" v-model="password">
-      
-      <mt-button type="primary" @click="login()">登录</mt-button>
+<div>
+<mt-header fixed title="我的">
 
-      <mt-button type="danger" @click.prevent="reg()" >注册</mt-button>
-    </form>
-    <form v-else>
-      <div>用户名:</div>
-      <input type="text" v-model="name">
-      <div>密码:</div>
-      <input type="password" v-model="password">
-      <div>再次输入密码:</div>
-      <input type="password" v-model="repeat">
-      <mt-button type="primary" @click="addUser()">确定</mt-button>
-      <mt-button type="danger" @click="cancel()">取消</mt-button>
-    </form>
-  </div>
+<router-link to="/" slot="left">
+    <mt-button icon="back">返回</mt-button>
+</router-link>
+</mt-header>
+
+<div class="box">
+
+
+    <div class="logo">这是logo的地方</div>
+    <el-row type="flex" justify="center">
+        <el-form ref="loginForm" :model="user" :rules="rules" status-icon label-width="80px">
+            <el-form-item label="用户名" prop="name">
+                <el-input v-model="user.name"></el-input>
+            </el-form-item>
+            <el-form-item label="密码" prop="pass">
+                <el-input v-model="user.pass" type="password"></el-input>
+            </el-form-item>
+            <el-form-item>
+                <el-button type="primary" icon="el-icon-upload" @click="login">登录</el-button>
+            </el-form-item>
+        </el-form>
+    </el-row>
+    </div>
+    </div>
+    
 </template>
 
 <script>
-export default {
-  name: "login",
-  data() {
-    return {
-      isReg: false,
-      name: "",
-      password: "",
-      repeat: ""
-    };
-  },
-  methods: {
-    login() {
-      //验证姓名和密码是否与locastorage一致
-      if (
-        localStorage.getItem("name") === this.name &&
-        localStorage.getItem("password") === this.password
-      ) {
-        //清空输入框
-        this.name = "";
-        this.password = "";
-        this.$router.push("/home/list");
-      }else{
-        alert('用户名或密码不正确');
-      }
-    },
-    reg() {
-      this.isReg = true;
-    },
-    cancel() {
-      this.isReg = false;
-    },
-    addUser() {
-      //验证两次输入密码是否一致
-      if (this.password === this.repeat) {
-        //将名字和密码存入localstorage中
-        localStorage.setItem("name", this.name);
-        localStorage.setItem("password", this.password);
-        //清空输入框
-        this.name = "";
-        this.password = "";
-        this.isReg = false;
-      } else {
-        alert("两次密码不一致");
-      }
+    export default {
+        methods: {
+            login () {
+                this.$refs.loginForm.validate((valid) => {
+                    if (valid) {
+                        if (this.user.name === 'admin' && this.user.pass === '123') {
+                            this.$notify({
+                                type: 'success',
+                                message: '欢迎你,' + this.user.name + '!',
+                                duration: 3000 
+                            })
+                            this.$router.replace('/')
+                        } else {
+                            this.$message({
+                                type: 'error',
+                                message: '用户名或密码错误',
+                                showClose: true
+                            })
+                        }
+                    }
+                    else {
+                        return false
+                    }
+                })
+            }
+        },
+        data () {
+            return {
+                user: {},
+                rules: {
+                    name: [
+                        {required: true, message: '用户名不能为空', trigger: 'blur'}
+                    ],
+                    pass: [
+                        {required: true, message: '密码不能为空', trigger: 'blur'}
+                    ]
+                }
+            }
+        }
     }
-  }
-};
 </script>
  
-<style lang="less">
 
+<style lang="less" >
+.box {
+    margin-top:40px; 
+    .logo {
+      width: 200px;
+      height: 200px;
+      background-color: red;
+      margin: 20px auto;
 
-
+    }
+  }
 </style>

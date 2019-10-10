@@ -2,13 +2,15 @@
 
 <div>
 
-<mt-header fixed title="固定在顶部">
+<mt-header fixed title="注册">
 
-<router-link to="/" slot="left">
+<router-link to="/mine" slot="left">
     <mt-button icon="back">返回</mt-button>
 </router-link>
 
 </mt-header>
+
+<div class="box">
 
 <mt-field label="用户名" placeholder="请输入用户名" v-model="username"></mt-field>
 <mt-field label="密码" placeholder="请输入密码" type="password" v-model="password"></mt-field>
@@ -22,7 +24,7 @@
 
 </div>
 
-
+</div>
 
 
 </template>
@@ -31,3 +33,15 @@
 <script>
 export default {};
 </script>
+
+<style lang="less">
+
+.logon {
+    width: 80%;
+    margin:10px;
+}
+.box {
+    margin-top:50px;
+}
+
+</style>

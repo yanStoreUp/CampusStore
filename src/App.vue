@@ -63,6 +63,7 @@ export default {
       }else if (newVal == "Mine" && this.$route.push != "/mine") {
         this.$router.push({ path: "/mine" });
       }
+
     },
     $router(newVal) {
       if (isNotBlank(newVal.meta.title)) {
@@ -76,7 +77,7 @@ export default {
 .content {
   width: 100%;
   overflow-x: hidden;
-  height: calc(100vh - 50px);
+  height: calc(100vh - 55px);
 }
 .app-router-enter,
 .app-router-leave-to {
@@ -90,9 +91,8 @@ export default {
 .app-router-leave-active {
   transition: all 0.4s ease;
 }
-.logon {
-  width: 80%;
-  margin: 10px;
+
+  
   #app {
     font-family: "Avenir", Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -109,6 +109,6 @@ export default {
         color: #42b983;
       }
     }
-  }
+  
 }
 </style>
