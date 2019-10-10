@@ -2,20 +2,12 @@ import Vue from 'vue'
 import app from './App.vue'
 import router from './router'
 import store from './store'
-import VueRouter from 'vue-router';
 
-import mintUI from 'mint-ui';
 import 'mint-ui/lib/style.css'
+import './font/iconfont.css'
 
 
 
-<<<<<<< HEAD
-// 安装路由
-Vue.use(VueRouter)
-Vue.use(mintUI)
-
-new Vue({
-=======
 //引入路由
 import VueRouter from 'vue-router'
 
@@ -42,7 +34,6 @@ Vue.use(MintUI)
 
 var vm = new Vue({
   el: '#app',
->>>>>>> 160f9217ddee87ab44ef818b814edef584d23dec
   router,
   store,
   render: c => c(app)

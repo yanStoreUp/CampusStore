@@ -3,7 +3,9 @@ import axios from 'axios'
 const instance = axios.create({
     timeout: 1000,
     headers: {
-        "Miaomiao-Token": 'token'
+        "Miaomiao-Token": 'token',
+        "X-Requested-With" : 'XMLHttpRequest'
+
     }
 });
 

@@ -16,7 +16,9 @@
       </div>
       <div id="right">
         <div class="goodsSort">分类</div>
-        <div class="goodsList" v-for="value in goodsArr" :key="value">{{value}}</div>
+        <router-link to="/goodsData" tag="div" class="goodsList" v-for="value in goodsArr" :key="value">
+          {{value}}
+        </router-link>
     </div>
   </div>
 </template>
@@ -39,7 +41,6 @@ export default {
     sortArr(x) {
       this.goodsArr = {};
       var goodsObj = new Object();
-      var str = "shanghai";
       this.sortLeftData.forEach(v => {
         if (goodsObj[v.py.charAt(0)]) {
           goodsObj[v.py.charAt(0)].push(v.nm);
