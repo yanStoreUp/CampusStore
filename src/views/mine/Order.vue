@@ -2,7 +2,7 @@
 
 <div>
 
-<mt-header fixed title="历史订单">
+<mt-header fixed title="历史订单" id="subject">
 
 <router-link to="/mine" slot="left">
     <mt-button icon="back">返回</mt-button>
@@ -26,6 +26,9 @@ export default {};
 </script>
 
 <style lang="less">
+#subject {
+    background-color: #EA5F5A;
+}
 
 
 </style>

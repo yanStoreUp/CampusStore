@@ -2,7 +2,7 @@
 
 <div>
 
-<mt-header fixed title="个人信息">
+<mt-header fixed title="个人信息" id="subject"> 
 
 <router-link to="/mine" slot="left">
     <mt-button icon="back">返回</mt-button>
@@ -31,9 +31,14 @@
 <!-- 账户名字 -->
 <p class='name'>我是账户名字</P>
 
-<p class='birthday contact'>我的名字:</P>
-<p class='birthday'>我的生日:</P>
-<p class='birthday'>联系方式</P>
+<p class='birthday userName'>我的名字:</P>
+<p class='birthday email'>邮箱:</P>
+<p class='birthday phonenumber'>联系方式</P>
+<p class='birthday sex'>性别</P>
+<p class='birthday remark'>备注</P>
+
+
+
 
 
 
@@ -75,6 +80,9 @@ export default {
 </script>
 
 <style lang="less">
+#subject {
+    background-color: #EA5F5A;
+}
 
 
 .box {
@@ -89,8 +97,8 @@ export default {
     border-bottom: 1px solid #EFEFEF;
     padding: 10px;
     }  
-    .contact {
-    margin-top:100px;
+    .userName {
+    margin-top:70px;
     }
  
   .el-upload__input {
