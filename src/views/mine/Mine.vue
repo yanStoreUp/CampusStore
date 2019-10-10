@@ -3,18 +3,6 @@
 <div>
 <mt-header fixed title="我的">
 
-<<<<<<< HEAD
-<p>
-    <!-- 使用 router-link 组件来导航. -->
-    <!-- 通过传入 `to` 属性指定链接. -->
-    <!-- <router-link> 默认会被渲染成一个 `<a>` 标签 -->
-    <router-link to="/mine/register"><mt-button type="primary" class="logon">登录</mt-button></router-link>
-    <router-link to="/mine/enroll"><mt-button type="danger" class="logon">注册</mt-button></router-link>
-  </p>
-  <!-- 路由出口
-  路由匹配到的组件将渲染在这里 -->
-  <router-view></router-view>
-=======
 <router-link to="/" slot="left">
     <mt-button icon="back">返回</mt-button>
 </router-link>
@@ -73,7 +61,6 @@
 
 
    </div>
->>>>>>> master
 </div>
 
 
@@ -121,8 +108,6 @@
 //     background-image: url("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1570619519934&di=951ac4c170dfe05b759e99b3fb501608&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fblog%2F201409%2F14%2F20140914005104_TsBrF.jpeg")
 // }
 
-<<<<<<< HEAD
-=======
 
 .box {
     margin-top:70px;
@@ -200,5 +185,4 @@
 
 
 
->>>>>>> master
 </style>
