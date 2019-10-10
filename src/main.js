@@ -23,6 +23,9 @@ import './main.css'
 
 //引入element-ui
 import Element from 'element-ui';
+//引入element-ui样式
+import 'element-ui/lib/theme-chalk/index.css';
+
 Vue.use(Element, { size: 'small', zIndex: 3000 });
 
 // 引入swiper
