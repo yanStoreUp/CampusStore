@@ -2,6 +2,7 @@
 import HomePage from './views/homePage/HomePage.vue'
 import ShopCar from './views/shopCar/ShopCar.vue'
 import Sort from './views/sort/Sort.vue'
+import goodsData from './views/sort/GoodsData.vue'
 
 import HotGoods from './views/homePage/HotGoods.vue'
 import OldGoods from './views/homePage/OldGoods.vue'
@@ -39,6 +40,10 @@ const router = new VueRouter({
     meta: {
       title: '商品分类'
     }
+  },
+  {
+    path:'/goodsData',
+    component:goodsData,
   }, {
     path: '/shopCar',
     component: ShopCar,

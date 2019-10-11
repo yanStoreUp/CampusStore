@@ -22,15 +22,16 @@
         </div>
       </div>
     </div>
-    <transition v-on:before-enter="beforeEnter" v-on:enter="enter" v-on:after-enter="afterEnter">
+    <transition v-on:before-enter="beforeEnter" v-on:enter="enter">
       <div v-show="flag" class="cir1"></div>
     </transition>
     <div id="addToCar">
-      <span @click="flag = !flag" id="font" class="iconfont icon-gouwuche"></span>
+      <span @click="fun()" id="font" class="iconfont icon-gouwuche"></span>
     </div>
   </div>
 </template>
 <script>
+import { MessageBox } from "mint-ui";
 export default {
   data() {
     return {
@@ -38,25 +39,30 @@ export default {
     };
   },
   methods: {
+    fun() {
+      if (this.flag) {
+        MessageBox("提示", "已经添加购物车，更改数量请去购物车中更改");
+      } else {
+        MessageBox("提示", "添加购物车成功!");
+      }
+      this.flag = true;
+    },
     beforeEnter(el) {
       el.style.transform = "translate(0,0)";
-      el.style.width = '100vw';
-      el.style.height = '60vh';
-      el.style.borderRadius = '0';
-      el.style.opacity = '0.5';
+      el.style.width = "100vw";
+      el.style.height = "60vh";
+      el.style.borderRadius = "0";
+      el.style.opacity = "0.5";
     },
     enter(el, done) {
       el.offsetWidth;
-      el.style.opacity = '0.5';
+      el.style.opacity = "0.5";
       el.style.transform = "translate(calc(100vw - 80px),calc(100vh - 135px))";
-      el.style.width = '80px';
-      el.style.height = '80px';
-      el.style.borderRadius = '50%';
+      el.style.width = "80px";
+      el.style.height = "80px";
+      el.style.borderRadius = "50%";
       el.style.transition = "all 0.5s linear";
       done();
-    },
-    afterEnter(el) {
-      this.flag = false;
     }
   }
 };
@@ -89,7 +95,7 @@ export default {
   left: calc(100vw - 80px);
   width: 80px;
   height: 80px;
-  background: orange;
+  background: #EA5F5A;
   border-radius: 50%;
   #font {
     font-size: 40px;
@@ -103,6 +109,6 @@ export default {
   left: 0;
   width: 80px;
   height: 80px;
-  background: orange;
+  background: #EA5F5A;
 }
 </style>

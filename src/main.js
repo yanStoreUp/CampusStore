@@ -4,7 +4,9 @@ import router from './router'
 import store from './store'
 
 import 'mint-ui/lib/style.css'
-import './font/iconfont.css'
+import './font/iconfont.css';
+
+
 
 
 
@@ -37,6 +39,7 @@ Vue.use(Element, { size: 'small', zIndex: 3000 });
 Vue.use(VueRouter)
 
 Vue.use(MintUI)
+
 
 
 var vm = new Vue({
