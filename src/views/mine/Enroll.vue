@@ -11,8 +11,22 @@
 
         </mt-header>
 
-
         <div class="box">
+
+
+<!-- 上传头像 -->
+    <el-upload id="head"
+  class="avatar-uploader"
+  action="https://jsonplaceholder.typicode.com/posts/"
+  :show-file-list="false"
+  :on-success="handleAvatarSuccess"
+  :before-upload="beforeAvatarUpload">
+  <img v-if="imageUrl" :src="imageUrl" class="avatar">
+  <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+</el-upload>
+
+
+
 
             <mt-field label="登录账户" placeholder="请输入登录账户" v-model="loginName" @keydown.native.capture="hintName()">
 
@@ -21,13 +35,13 @@
             </mt-field>
 
 
-            <mt-field label="密码" placeholder="请输入密码" v-model="password" @keydown.native.capture="hintPassword()">
+            <mt-field label="密码" placeholder="请输入密码" type="password" v-model="password" @keydown.native.capture="hintPassword()">
 
                 <span class="hint">{{msgpassword}}</span>
 
             </mt-field>
 
-            <mt-field label="再输入密码" placeholder="请再次输入密码" v-model="recur">
+            <mt-field label="再输入密码" placeholder="请再次输入密码" type="password" v-model="recur">
 
                 <span class="hint">{{msgrecur}}</span>
 
@@ -47,7 +61,7 @@
             </mt-field>
 
 
-            <mt-field label="验证码" v-model="captcha">
+            <mt-field label="验证码" placeholder="请输入验证码" v-model="captcha">
 
 
                 <button class="{disabled: !this.canClick}" id="disabled" @click="countDown">
@@ -107,12 +121,28 @@
                 msgphonenumbere: '',
                 recur: '',
                 msgrecur: '',
-
+                imageUrl: '',
             }
 
         },
 
         methods: {
+            handleAvatarSuccess(res, file) {
+        this.imageUrl = URL.createObjectURL(file.raw);
+      },
+      beforeAvatarUpload(file) {
+        const isJPG = file.type === 'image/jpeg';
+        const isLt2M = file.size / 1024 / 1024 < 2;
+
+        if (!isJPG) {
+          this.$message.error('上传头像图片只能是 JPG 格式!');
+        }
+        if (!isLt2M) {
+          this.$message.error('上传头像图片大小不能超过 2MB!');
+        }
+        return isJPG && isLt2M;
+      },
+   
 
 
             hintName() {
@@ -210,7 +240,21 @@
 
             uploading() {
                 
-                gitRegiste(this.loginName,this.password,this.userName,this.phonenumber,this.captcha)
+                gitRegiste(this.loginName,this.password,this.userName,this.phonenumber,this.captcha).then(res => {
+                        if (res.code == 0) {
+                                this.$notify({
+                                type: 'success',
+                                message: '注册成功!',
+                                duration: 3000 
+                            })
+                            this.$router.replace('/register')                              
+                        } else {
+                             this.$message({
+                                type: 'error',
+                                message: '再检查一下，还有些问题！',
+                            })  
+                        }
+               })
 
 
         },
@@ -242,14 +286,31 @@
         background-color: #EA5F5A;
     }
     .box {
-
-        margin-top: 50px;
+        margin-top: 60px;
+        padding-left: 5px;
+        padding-right: 5px;
+    #head {
+    width: 150px;
+    margin: 5px auto;
+    height: 150px;
+        .el-upload {
+            width: 150px;
+            height: 150px; 
+        }
+    }
+    
+    .avatar-uploader-icon {
+    width: 150px;
+    height: 150px;  
+    visibility: hidden; 
+    
+    }
 
         #logon {
 
             width: 80%;
 
-            margin: 30px 10%
+            margin: 0px 10%
 
         }
 
@@ -273,15 +334,22 @@
 
             color: white;
 
-            border: 1px solid #55BB36;
+            border: 1px solid #EA5F5A;
 
-            background-color: #55BB36;
+            background-color: #EA5F5A;
 
             outline: none;
 
             text-align: center;
 
         }
+        .mint-cell-wrapper {
+            margin-top: 15px;
+        }
+
+
+
+
 
     }
 </style>

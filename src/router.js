@@ -1,27 +1,32 @@
+import HomePage from './views/homePage/HomePage.vue';
+import ShopCar from './views/shopCar/ShopCar.vue';
+import Sort from './views/sort/Sort.vue';
+import goodsData from './views/sort/GoodsData.vue';
 
-import HomePage from './views/homePage/HomePage.vue'
-import ShopCar from './views/shopCar/ShopCar.vue'
-import Sort from './views/sort/Sort.vue'
-import goodsData from './views/sort/GoodsData.vue'
-
-import HotGoods from './views/homePage/HotGoods.vue'
-import OldGoods from './views/homePage/OldGoods.vue'
-import RecommendGoods from './views/homePage/RecommendGoods.vue'
-import Search from './views/homePage/Search.vue'
+import HotGoods from './views/homePage/HotGoods.vue';
+import OldGoods from './views/homePage/OldGoods.vue';
+import RecommendGoods from './views/homePage/RecommendGoods.vue';
+import Search from './views/homePage/Search.vue';
 
 import VueRouter from 'vue-router';
 
 
 // 个人信息引入
-import Personal from './views/mine/Personal.vue'
+import Personal from './views/mine/Personal.vue';
 // 历史订单引入
-import Order from './views/mine/Order.vue'
+import Order from './views/mine/Order.vue';
 // 登录引入
-import Register from './views/mine/Register.vue'
+import Register from './views/mine/Register.vue';
 // 注册引入
-import Enroll from './views/mine/Enroll.vue'
+import Enroll from './views/mine/Enroll.vue';
 // 我的引入
-import Mine from './views/mine/Mine.vue'
+import Mine from './views/mine/Mine.vue';
+// 修改信息 
+import Change from './views/mine/Change.vue';
+// 忘记密码
+import Memory from './views/mine/Memory.vue';
+
+
 
 
 const router = new VueRouter({
@@ -123,6 +128,20 @@ const router = new VueRouter({
         title: '历史订单'
       },
     },
+    {
+      path: '/change',
+      component: Change,
+      meta: {
+        title: '修改信息'
+      },
+    },
+    {
+      path: '/memory',
+      component: Memory,
+      meta: {
+        title: '忘记密码'
+      },
+    }
 
   ]
 })

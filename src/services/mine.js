@@ -3,13 +3,13 @@
 import http from './api'
 
 // 登录
-function gitEnter(username,rememberMe,password) {
+function gitEnter(username,password) {
 
     let formdata = new FormData() 
     formdata.append('username',`${username}`)
     formdata.append('rememberMe',true)
     formdata.append('password',`${password}`)
-    http.post('/api/cityList',formdata);
+   return http.post('/api/login',formdata);
 }
 
 // 短信验证
@@ -26,14 +26,29 @@ function gitRegiste(loginName,password,userName,phonenumber,code){
     formdata.append('userName',`${userName}`)
     formdata.append('phonenumber',`${phonenumber}`)
     formdata.append('code',`${code}`)
-    http.post('/api/registry',formdata)
+    return http.post('/api/registry',formdata)
 }
 
+
+
+
+// 修改个人信息
+function gitPerson() {
+    return http.post('/api/system/user/profile/update/')
+       
+}
+
+// 查看个人信息 
+function gitExamine () {
+    return http.get('/api/login-user/info')
+}
 
 
 export {
     gitEnter,
     gitnote,
     gitRegiste,
+    gitExamine,
+    gitPerson,
 
 }

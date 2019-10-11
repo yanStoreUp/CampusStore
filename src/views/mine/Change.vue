@@ -1,6 +1,6 @@
 <template>
   <div>
-    <mt-header fixed title="个人信息" id="subject">
+    <mt-header fixed title="修改信息" id="subject">
       <router-link to="/mine" slot="left">
         <mt-button icon="back">返回</mt-button>
       </router-link>
@@ -20,34 +20,37 @@
         <i v-else class="el-icon-plus avatar-uploader-icon" id="heads"></i>
       </el-upload>
 
-      <!-- 使用 router-link 组件来导航. -->
-      <!-- 通过传入 `to` 属性指定链接. -->
-      <!-- <router-link> 默认会被渲染成一个 `<a>` 标签 -->
-
-      <!-- 账户名字 -->
-      <p class="birthday loginName">
-        <span class="left">登录账户:</span>
-        <span class="matter">{{ msgloginName }}</span>
-      </p>
+      
+      
       <p class="birthday userName">
         <span class="left">昵称:</span>
-        <span class="matter">{{ msguserName }}</span>
+        <span class="matter"><span></span>{{ msguserName }}</span>
+        <el-input v-model="input" placeholder="修改你的昵称" class="inputs"></el-input>
+
       </p>
       <p class="birthday email">
         <span class="left">邮箱</span>
         <span class="matter">{{ msgemail }}</span>
+        <el-input v-model="input" placeholder="修改你的邮箱" class="inputs"></el-input>
+
       </p>
       <p class="birthday phonenumber">
         <span class="left">电话号码</span>
         <span class="matter">{{ msgphonenumber }}</span>
+        <el-input v-model="input" placeholder="修改你的电话号码" class="inputs"></el-input>
+
       </p>
       <p class="birthday sex">
         <span class="left">性别</span>
         <span class="matter">{{ msgsex }}</span>
+        <el-input v-model="input" placeholder="修改你的性别" class="inputs"></el-input>
+
       </p>
       <p class="birthday remark">
         <span class="left">备注</span>
         <span class="matter">{{ msgremark }}</span>
+        <el-input v-model="input" placeholder="修改你的备注" class="inputs"></el-input>
+        
       </p>
       <router-link to="/change">
       <mt-button type="primary" id="logon">修改信息</mt-button>
@@ -65,7 +68,6 @@ export default {
   data() {
     return {
       imageUrl: "",
-      msgloginName: "",
       msguserName: "",
       msgemail: "",
       msgphonenumber: "",
@@ -93,7 +95,6 @@ export default {
   },
   beforeMount() {
     gitExamine().then(res => {
-      this.msgloginName = res.data.loginName;
       this.msguserName = res.data.userName;
       this.msgemail = res.data.email;
       this.msgphonenumber = res.data.phonenumber;
@@ -135,6 +136,12 @@ export default {
   .mint-button--large {
     width: 80%;
     margin: 10px auto;
+  }
+  .inputs {
+    margin-top: 10px;
+    width: 65%;
+    margin-left: 25%;
+    margin-right: 10%
   }
 }
 
