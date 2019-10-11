@@ -1,6 +1,6 @@
 <template>
   <div>
-    <mt-header fixed title="历史订单" id="subject">
+    <mt-header fixed title="忘记密码" id="subject">
       <router-link to="/mine" slot="left">
         <mt-button icon="back">返回</mt-button>
       </router-link>
