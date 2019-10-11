@@ -277,14 +277,14 @@
         </div>
 
         <!-- 刷新 -->
-        <mt-loadmore
+        <!-- <mt-loadmore
           :top-method="loadTop"
           :bottom-method="loadBottom"
           :bottom-all-loaded="allLoaded"
           ref="loadmore"
-        >
+        > -->
           <ul>
-            <li v-for="item in cities" :key='item'>{{ item.id }}</li>
+            <li v-for="item in cities" :key='item.id'>{{ item.id }}</li>
           </ul>
         </mt-loadmore>
       </div>
