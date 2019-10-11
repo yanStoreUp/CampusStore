@@ -1,7 +1,15 @@
 <template>
   <div>
     <!-- 搜索框 -->
-    <mt-search cancel-text="搜索" placeholder="女装时尚气质"></mt-search>
+    <!-- <mt-search cancel-text="搜索" placeholder="女装时尚气质" v-model='searchText' autofocus show></mt-search> -->
+
+    <!-- <mt-search v-model="value">
+      <mt-cell v-for="item in result" :title="item.title" :value="item.value"></mt-cell>
+    </mt-search>-->
+    <div @click="search">
+      <!-- <mt-search v-model="value" :result.sync="result" ></mt-search> -->
+      <mt-search v-model="value" ></mt-search>
+    </div>
 
     <div id="content">
       <!-- 历史记录 -->
@@ -10,12 +18,14 @@
         <!-- <span>上衣</span>
         <span>连衣裙</span>
         <span>潮流女装网红套装</span>
-        <span>潮流女装秋季新款</span> -->
+        <span>潮流女装秋季新款</span>-->
         <ul>
-            <li>上衣</li>
+          <!-- <li>上衣</li>
             <li>连衣裙</li>
             <li>潮流女装网红套装</li>
-            <li>潮流女装秋季新款</li>
+          <li>潮流女装秋季新款</li>-->
+          {{myVal}}
+          <!-- {{result}} -->
         </ul>
       </div>
 
@@ -24,7 +34,19 @@
   </div>
 </template>
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      myVal: "",
+      value: ""
+    };
+  },
+  methods: {
+    search() {
+      this.myVal = this.value;
+    }
+  }
+};
 </script>
 <style lang="less" scoped>
 // 搜索
@@ -67,11 +89,11 @@ export default {};
       color: black;
     }
     li {
-        float: left;
+      float: left;
       padding: 4px 10px;
       border-radius: 23px;
       font-size: 13px;
-      color: 8d8d8d;
+      color: #8d8d8d;
       background-color: #f8f8f8;
       text-align: center;
       height: 15px;

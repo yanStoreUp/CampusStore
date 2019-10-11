@@ -11,187 +11,24 @@
 
     <!-- 轮播图 -->
     <mt-swipe id="topSwiper" :auto="4000">
-      <mt-swipe-item>
-        <img src="@/assets/imgs/goods/1.jpg" alt />
-      </mt-swipe-item>
-      <mt-swipe-item>
-        <img src="@/assets/imgs/goods/2.jpg" alt />
-      </mt-swipe-item>
-      <mt-swipe-item>
-        <img src="@/assets/imgs/goods/3.jpg" alt />
-      </mt-swipe-item>
-      <mt-swipe-item>
-        <img src="@/assets/imgs/goods/4.jpg" alt />
+      <mt-swipe-item v-for="item in shufflingList" :key="item.goodsId">
+         <img :src="item.coverImgUrl" alt />
       </mt-swipe-item>
     </mt-swipe>
 
     <div id="streeMain">
       <div id="content">
-        <!-- 热门商品 -->
-        <div id="hotGoods">
-          <router-link to="/hotGoods">
-            <div class="hotGoodsTitle">热门商品</div>
-          </router-link>
-          <!-- <ul>
-            <li>
-              <img src="@/assets/imgs/rendering/rd1.jpg" alt />
-              <div>发现世间</div>
-            </li>
-            <li>
-              <img src="@/assets/imgs/goods/2.jpg" alt />
-              <div>发现世间</div>
-            </li>
-            <li>
-              <img src="@/assets/imgs/goods/3.jpg" alt />
-              <div>发现世间</div>
-            </li>
-            <li>
-              <img src="@/assets/imgs/goods/4.jpg" alt />
-              <div>发现世间</div>
-            </li>
-            <li>
-              <img src="@/assets/imgs/goods/5.jpg" alt />
-              <div>发现世间</div>
-            </li>
-            <li>
-              <img src="@/assets/imgs/goods/6.jpg" alt />
-              <div>发现世间</div>
-            </li>
-            <li>
-              <img src="@/assets/imgs/goods/7.jpg" alt />
-              <div>发现世间</div>
-            </li>
-            <li>
-              <img src="@/assets/imgs/goods//8.jpg" alt />
-              <div>发现世间</div>
-            </li>
-          </ul>-->
-          <ul>
-            <el-row>
-              <el-col :span="6">
-                <div id="liOut" class="grid-content bg-purple">
-                  <li>
-                    <img src="@/assets/imgs/goods/1.jpg" alt />
-                    <div>发现世间好物</div>
-                  </li>
-                </div>
-              </el-col>
-              <el-col :span="6">
-                <div id="liOut" class="grid-content bg-purple-light">
-                  <li>
-                    <img src="@/assets/imgs/goods/2.jpg" alt />
-                    <div>发现世间好物</div>
-                  </li>
-                </div>
-              </el-col>
-              <el-col :span="6">
-                <div id="liOut" class="grid-content bg-purple">
-                  <li>
-                    <img src="@/assets/imgs/goods/3.jpg" alt />
-                    <div>发现世间好物</div>
-                  </li>
-                </div>
-              </el-col>
-              <el-col :span="6">
-                <div id="liOut" class="grid-content bg-purple-light">
-                  <li>
-                    <img src="@/assets/imgs/goods/4.jpg" alt />
-                    <div>发现世间好物</div>
-                  </li>
-                </div>
-              </el-col>
-            </el-row>
-
-            <el-row>
-              <el-col :span="6">
-                <div id="liOut" class="grid-content bg-purple">
-                  <li>
-                    <img src="@/assets/imgs/goods/1.jpg" alt />
-                    <div>发现世间好物</div>
-                  </li>
-                </div>
-              </el-col>
-              <el-col :span="6">
-                <div id="liOut" class="grid-content bg-purple-light">
-                  <li>
-                    <img src="@/assets/imgs/goods/2.jpg" alt />
-                    <div>发现世间好物</div>
-                  </li>
-                </div>
-              </el-col>
-              <el-col :span="6">
-                <div id="liOut" class="grid-content bg-purple">
-                  <li>
-                    <img src="@/assets/imgs/goods/3.jpg" alt />
-                    <div>发现世间好物</div>
-                  </li>
-                </div>
-              </el-col>
-              <el-col :span="6">
-                <div id="liOut" class="grid-content bg-purple-light">
-                  <li>
-                    <img src="@/assets/imgs/goods/4.jpg" alt />
-                    <div>发现世间好物</div>
-                  </li>
-                </div>
-              </el-col>
-            </el-row>
-          </ul>
-        </div>
-        <!-- 二手商品 -->
+        <!-- 二手商品调接口 -->
         <div id="oldGoods">
           <router-link to="/oldGoods">
             <div class="oldGoodsTitle">二手商品</div>
           </router-link>
           <ul>
             <el-row>
-              <el-col :span="8">
+              <el-col :span="8" v-for="item in oldGoods" :key="item.goodsId">
                 <div id="liOut" class="grid-content bg-purple">
                   <li>
-                    <img src="@/assets/imgs/goods/1.jpg" alt />
-                    <div>发现世间好物</div>
-                  </li>
-                </div>
-              </el-col>
-              <el-col :span="8">
-                <div id="liOut" class="grid-content bg-purple-light">
-                  <li>
-                    <img src="@/assets/imgs/goods/2.jpg" alt />
-                    <div>发现世间好物</div>
-                  </li>
-                </div>
-              </el-col>
-              <el-col :span="8">
-                <div id="liOut" class="grid-content bg-purple">
-                  <li>
-                    <img src="@/assets/imgs/goods/3.jpg" alt />
-                    <div>发现世间好物</div>
-                  </li>
-                </div>
-              </el-col>
-            </el-row>
-
-            <el-row>
-              <el-col :span="8">
-                <div id="liOut" class="grid-content bg-purple">
-                  <li>
-                    <img src="@/assets/imgs/goods/1.jpg" alt />
-                    <div>发现世间好物</div>
-                  </li>
-                </div>
-              </el-col>
-              <el-col :span="8">
-                <div id="liOut" class="grid-content bg-purple-light">
-                  <li>
-                    <img src="@/assets/imgs/goods/2.jpg" alt />
-                    <div>发现世间好物</div>
-                  </li>
-                </div>
-              </el-col>
-              <el-col :span="8">
-                <div id="liOut" class="grid-content bg-purple">
-                  <li>
-                    <img src="@/assets/imgs/goods/3.jpg" alt />
+                    <img :src="item.coverImgUrl" alt />
                     <div>发现世间好物</div>
                   </li>
                 </div>
@@ -199,81 +36,29 @@
             </el-row>
           </ul>
         </div>
+
+
+
         <!-- 推荐商品 -->
         <div id="recommendGoods">
           <router-link to="/recommendGoods">
             <div class="recommendGoodsTitle">推荐商品</div>
           </router-link>
-
-          <ul>
-            <el-row>
-              <el-col :span="12">
-                <div id="liOut" class="grid-content bg-purple">
-                  <li>
-                    <img src="@/assets/imgs/goods/1.jpg" alt />
-                    <div>发现世间好物</div>
-                  </li>
-                </div>
-              </el-col>
-              <el-col :span="12">
-                <div id="liOut" class="grid-content bg-purple-light">
-                  <li>
-                    <img src="@/assets/imgs/goods/2.jpg" alt />
-                    <div>发现世间好物</div>
-                  </li>
-                </div>
-              </el-col>
-            </el-row>
-
-            <el-row>
-              <el-col :span="12">
-                <div id="liOut" class="grid-content bg-purple">
-                  <li>
-                    <img src="@/assets/imgs/goods/1.jpg" alt />
-                    <div>发现世间好物</div>
-                  </li>
-                </div>
-              </el-col>
-              <el-col :span="12">
-                <div id="liOut" class="grid-content bg-purple-light">
-                  <li>
-                    <img src="@/assets/imgs/goods/2.jpg" alt />
-                    <div>发现世间好物</div>
-                  </li>
-                </div>
-              </el-col>
-            </el-row>
-
-            <el-row>
-              <el-col :span="12">
-                <div id="liOut" class="grid-content bg-purple">
-                  <li>
-                    <img src="@/assets/imgs/goods/1.jpg" alt />
-                    <div>发现世间好物</div>
-                  </li>
-                </div>
-              </el-col>
-              <el-col :span="12">
-                <div id="liOut" class="grid-content bg-purple-light">
-                  <li>
-                    <img src="@/assets/imgs/goods/2.jpg" alt />
-                    <div>发现世间好物</div>
-                  </li>
-                </div>
-              </el-col>
-            </el-row>
-          </ul>
-        </div>
-
-        <!-- 瀑布流 -->
-        <div id="pb">
-          <ul class="ul1">
-            <!-- <li></li>
-            <div><img src="写意/img/fangda.png" alt=""></div>-->
-          </ul>
-          <ul class="ul1"></ul>
-          <ul class="ul1"></ul>
-          <ul class="ul1"></ul>
+          <!-- 瀑布流 -->
+          <div id="pb">
+            <ul class="ul1" ref="ulLeft">
+              <li v-for="item in ulLeftList" :key="item.goodsId">
+                <img :src="item.coverImgUrl" alt @load="onImageLoad()" />
+                <div class="describe">{{item.name}}</div>
+              </li>
+            </ul>
+            <ul class="ul2" ref="ulRight">
+              <li v-for="item in ulRightList" :key="item.goodsId">
+                <img :src="item.coverImgUrl" alt @load="onImageLoad()" />
+                <div class="describe">{{item.name}}</div>
+              </li>
+            </ul>
+          </div>
         </div>
 
         <!-- 刷新 -->
@@ -282,60 +67,70 @@
           :bottom-method="loadBottom"
           :bottom-all-loaded="allLoaded"
           ref="loadmore"
-        > -->
-          <ul>
-            <li v-for="item in cities" :key='item.id'>{{ item.id }}</li>
-          </ul>
+        >-->
+        <!-- <ul>
+          <li v-for="item in oldGoods" :key="item.goodsId">
+            <img :src="item.bannerUrl" alt />
+          </li>
+          <li v-for="item in goodsList" :key="item.goodsId">
+            <img :src="item.coverImgUrl" alt />
+          </li>
+        </ul> -->
         <!-- </mt-loadmore> -->
       </div>
     </div>
   </div>
 </template>
 <script>
-// import { getCityList } from "@/services/city";
+import { getOldGoodsList, getManyGoodsList,getShufflingList  } from "@/services/homePage";
 
 export default {
   data() {
     return {
-      cities: []
+      //二手商品列表
+      oldGoods: [],
+      //瀑布流列表
+      ulLeftList: [],
+      ulRightList: [],
+      //所有商品列表
+      goodsList: [],
+      //轮播图列表
+      shufflingList:[]
     };
+  },
+  methods: {
+    onImageLoad() {
+      if (this.goodsList.length > 0) {
+        if (this.$refs.ulLeft.offsetHeight < this.$refs.ulRight.offsetHeight) {
+          this.ulLeftList.push(this.goodsList.shift());
+        } else {
+          this.ulRightList.push(this.goodsList.shift());
+        }
+      }
+    }
   },
   created() {
     //对接口的调用进行封装  ↓5
     // this.axios.get("/api/cityList").then(res=>{
     //     debugger
     // })
-    getCityList().then(res => {
-      this.cities = res.data.cities;
+    //获取二手商品列表
+    getOldGoodsList().then(res => {
+      this.oldGoods = res.rows;
+      console.log(this.oldGoods);
     });
-  },
-  mounted() {
-    //瀑布流
-    var uls = document.getElementById("pb").getElementsByTagName("ul");
-    // debugger
-    var n = 0;
-    for (var i = 0; i < 30; i++) {
-      n++;
-      var img = document.createElement("img");
-      img.src = `/rendering/rd${n}.jpg`;
-      img.onload = function() {
-        var li = document.createElement("li");
-        li.appendChild(this);
-        // li.innerHTML += `<div><img src="写意/img/fangda.png" alt=""></div>`;
-        li.innerHTML += `<div class='describe'>￥999 2019人付款</div>`;
-        uls[minIndex()].appendChild(li);
-      };
-    }
-
-    function minIndex() {
-      var min = 0;
-      for (var i = 1; i < uls.length; i++) {
-        if (uls[min].offsetHeight > uls[i].offsetHeight) {
-          min = i;
-        }
-      }
-      return min;
-    }
+    //获取商品列表
+    getManyGoodsList().then(res => {
+      this.goodsList = res.rows;
+      console.log(this.goodsList)
+      this.ulLeftList.push(this.goodsList.shift());
+    });
+    //获取轮播图列表
+    getShufflingList().then(res => {
+      this.shufflingList = res.rows;
+      console.log(111111111111111111)
+      console.log(this.shufflingList)
+    });
   }
 };
 </script>
@@ -382,8 +177,24 @@ export default {
       overflow: hidden;
       /* background: darkslategrey; */
       .ul1 {
-        width: 23%;
+        width: 48%;
         float: left;
+        margin: 1%;
+        // background: dimgrey;
+        ::v-deep li {
+          width: 100%;
+          margin-bottom: 5px;
+          img {
+            width: 100%;
+          }
+          .describe {
+            font-size: 12px;
+          }
+        }
+      }
+      .ul2 {
+        width: 48%;
+        float: right;
         margin: 1%;
         // background: dimgrey;
         ::v-deep li {
