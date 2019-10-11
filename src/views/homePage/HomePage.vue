@@ -286,7 +286,7 @@
           <ul>
             <li v-for="item in cities" :key='item.id'>{{ item.id }}</li>
           </ul>
-        </mt-loadmore>
+        <!-- </mt-loadmore> -->
       </div>
     </div>
   </div>
