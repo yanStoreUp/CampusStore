@@ -292,7 +292,7 @@
   </div>
 </template>
 <script>
-import { getCityList } from "@/services/city";
+// import { getCityList } from "@/services/city";
 
 export default {
   data() {

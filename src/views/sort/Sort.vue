@@ -1,70 +1,101 @@
 <template>
   <div id="box">
+    <!-- 顶部 -->
+    <mt-header fixed title="购物车"></mt-header>
+    <!-- 左边分类 -->
     <div id="left">
-      <li @click="sortArr('a')">a</li>
-      <li @click="sortArr('b')">b</li>
-      <li @click="sortArr('c')">c</li>
-      <li @click="sortArr('d')">d</li>
-      <!-- <li @click="sortArr(x)" v-for="x in 26" :key="x">{{x}}</li> -->
+      <li @click="getSort(value)" class="leftSort" ref="leftSort" v-for="value in sortLeftData" :key="value.id">{{value.name}}</li>
     </div>
-      <div id="right">
-        <div class="goodsSort">分类</div>
-        <div class="goodsList">1</div>
-        <div class="goodsList">1</div>
-        <div class="goodsList">1</div>
-        <div class="goodsList">1</div>
+    <!-- 右边分类对应的商品展示 -->
+    <div id="right">
+      <!-- 商品分类的名称 -->
+      <div class="goodsSort">{{sortName}}</div>
+      <!-- 商品展示卡片 -->
+      <div @click="getGoodsId(value)" tag="div" class="goodsList" v-for="value in goodsArr" :key="value.id">
+        <!-- 商品图片 -->
+        <img  :src=value.coverImgUrl alt="">
+        <!-- 商品名称 -->
+        <div>{{value.name}}</div>
       </div>
-      <div id="right">
-        <div class="goodsSort">分类</div>
-        <router-link to="/goodsData" tag="div" class="goodsList" v-for="value in goodsArr" :key="value">
-          {{value}}
-        </router-link>
     </div>
   </div>
 </template>
 
 <script>
-import { sort } from "../../services/sort";
+// 引入接口
+import sort from "../../services/sort";
 export default {
   data() {
     return {
+      // 商品分类列表
       sortLeftData: [],
-      goodsArr: {}
+      // 商品分类名称
+      sortName: "分类",
+      // 对应分类商品列表
+      goodsArr: []
     };
   },
   created() {
-    sort().then(res => {
-      this.sortLeftData = res.data.cities;
+    // 获取商品分类列表
+    sort.sort().then(res => {
+      // console.log(res.rows)
+      this.sortLeftData = res.rows;
     });
   },
   methods: {
-    sortArr(x) {
-      this.goodsArr = {};
-      var goodsObj = new Object();
-      this.sortLeftData.forEach(v => {
-        if (goodsObj[v.py.charAt(0)]) {
-          goodsObj[v.py.charAt(0)].push(v.nm);
-        } else {
-          goodsObj[v.py.charAt(0)] = [v.nm];
-        }
+    getSort(x) {
+      // 初始化分类商品列表
+      this.goodsArr = []
+      // 获取商品分类名称
+      this.sortName = x.name;
+      // 获取对应分类的商品列表
+      sort.sortArr().then(res => {
+        res.rows.forEach(v =>{
+          if(v.categoryId == x.categoryId){
+            this.goodsArr.push(v)
+          }
+        });
       });
-      this.goodsArr = goodsObj[x];
-    }
+    },
+    //获取商品id放入store中用来渲染商品详情页面
+    getGoodsId(x){
+      this.$store.commit('gerGoodsId',{ran:x})
+      this.$router.push({path:'/goodsData'})
+    } 
+    // 改变选中样式
+
+
+
+
+
   }
 };
 </script>
 
 <style lang="less">
+#box{
+  overflow: hidden;
+}
 * {
   list-style: none;
 }
 #left {
+  margin-top: 40px;
   float: left;
-  // height: 500px;
   width: 100px;
-  background-color: skyblue;
+  li{
+    height: 5vh;
+    width: 94%;
+    margin: 3px 0 0 3% ;
+    background: white;
+    border: 1px solid black;
+    border-radius: 10px;
+    text-align: center;
+    line-height: 5vh;
+  }
 }
 #right {
+  margin-top: 40px;
   //   height: 500px;
   width: calc(100vw - 100px);
   margin-left: 100px;
@@ -72,18 +103,24 @@ export default {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  flex-direction:row;
-  .goodsSort{
+  flex-direction: row;
+  .goodsSort {
     width: 100%;
     height: 30px;
     background-color: white;
   }
   .goodsList {
     margin: 15px 5px 5px 5px;
-    width: 30vw;
-    height: 20vh;
+    overflow: hidden;
     background-color: orange;
     border-radius: 10px;
+    img{
+      width: 30vw;
+      height: 20vh;
+    }
+    div{
+      text-align: center;
+    }
   }
 }
 </style>

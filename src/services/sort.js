@@ -1,9 +1,13 @@
 import http from './api'
 
 function sort() {
-    return http.get('/api/cityList');
+    return http.post('/api/shop/shopCategory/open/list');
+}
+function sortArr() {
+    return http.post('/api/shop/shopGoods/open/list');
 }
 
-export {
-    sort
+export default{
+    sort,
+    sortArr
 }
