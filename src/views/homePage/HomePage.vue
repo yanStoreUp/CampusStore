@@ -99,6 +99,7 @@ export default {
     };
   },
   methods: {
+    //  图片加载完之后执行的函数
     onImageLoad() {
       if (this.goodsList.length > 0) {
         if (this.$refs.ulLeft.offsetHeight < this.$refs.ulRight.offsetHeight) {

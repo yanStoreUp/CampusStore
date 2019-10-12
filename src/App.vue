@@ -19,15 +19,15 @@
         首页
       </mt-tab-item>
       <mt-tab-item id="Sort">
-        <!-- <img slot="icon" src="../assets/100x100.png" /> -->
+        <span slot="icon" class="iconfont icon-shangpinfenlei"></span>
         商品分类
       </mt-tab-item>
       <mt-tab-item id="ShopCar">
-        <!-- <img slot="icon" src="../assets/100x100.png" /> -->
+        <span slot="icon" class="iconfont icon-gouwuche"></span>
         购物车
       </mt-tab-item>
       <mt-tab-item id="Mine">
-        <!-- <img slot="icon" src="../assets/100x100.png" /> -->
+        <span slot="icon" class="iconfont icon-wode"></span>
         我的
       </mt-tab-item>
     </mt-tabbar>

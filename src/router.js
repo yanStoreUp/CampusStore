@@ -26,7 +26,10 @@ import Change from './views/mine/Change.vue';
 // 忘记密码
 import Memory from './views/mine/Memory.vue';
 
-
+//二手商品中的衣服，饮品
+import Clothes from '@/components/index/Clothes'
+import Drink from '@/components/index/Drink'
+import Tab from '@/components/index/Tab'
 
 
 const router = new VueRouter({
@@ -70,7 +73,21 @@ const router = new VueRouter({
     },
     {
       path: '/oldGoods',
-      component: OldGoods
+      component: OldGoods,
+      children:[
+        // {
+        //   path:'',
+        //   redirect:'clothes'
+        // },
+        {
+          path:'clothes',
+          component:Clothes
+        },
+        {
+          path:'drink',
+          component:Drink
+        }
+      ]
     },
     {
       path: '/recommendGoods',
@@ -84,21 +101,6 @@ const router = new VueRouter({
       path: '/',
       redirect: '/HomePage'
     },
-    // children: [{
-    //     path: 'register',
-    //     component: Register,
-    //     meta: {
-    //       title: '登录'
-    //     }
-    //   },
-    //   {
-    //     path: 'enroll',
-    //     component: Enroll,
-    //     meta: {
-    //       title: '注册'
-    //     }
-    //   }
-    // ]
 
     {
       path: '/register',
@@ -146,3 +148,4 @@ const router = new VueRouter({
   ]
 })
 export default router
+export {Tab}

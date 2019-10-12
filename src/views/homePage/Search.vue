@@ -1,31 +1,20 @@
 <template>
   <div>
     <!-- 搜索框 -->
-    <!-- <mt-search cancel-text="搜索" placeholder="女装时尚气质" v-model='searchText' autofocus show></mt-search> -->
-
-    <!-- <mt-search v-model="value">
-      <mt-cell v-for="item in result" :title="item.title" :value="item.value"></mt-cell>
-    </mt-search>-->
-    <div @click="search">
-      <!-- <mt-search v-model="value" :result.sync="result" ></mt-search> -->
-      <mt-search v-model="value" ></mt-search>
+    <!-- <div @click="search">
+      <mt-search v-model="value" cancel-text="取消" placeholder="搜索"></mt-search>
+    </div>-->
+    <div id="search">
+      <input type="text" v-model="myVal" />
+      <i class="iconfont icon-fangdajing"></i>
+      <div id="searchButton" @click="search">搜索</div>
     </div>
 
     <div id="content">
       <!-- 历史记录 -->
       <div id="historyRecord">
         <div id="historyRecordTitle">历史记录</div>
-        <!-- <span>上衣</span>
-        <span>连衣裙</span>
-        <span>潮流女装网红套装</span>
-        <span>潮流女装秋季新款</span>-->
-        <ul>
-          <!-- <li>上衣</li>
-            <li>连衣裙</li>
-            <li>潮流女装网红套装</li>
-          <li>潮流女装秋季新款</li>-->
-          {{myVal}}
-          <!-- {{result}} -->
+        <ul ref="ulHistory">
         </ul>
       </div>
 
@@ -33,37 +22,51 @@
     </div>
   </div>
 </template>
+
 <script>
 export default {
   data() {
     return {
-      myVal: "",
-      value: ""
+      myVal: ""
     };
   },
   methods: {
     search() {
-      this.myVal = this.value;
+      var li = document.createElement("li");
+      li.innerHTML = `${this.myVal}`;
+      this.$refs.ulHistory.appendChild(li);
     }
   }
 };
 </script>
 <style lang="less" scoped>
 // 搜索
-.mint-search {
-  height: 100%;
-  ::v-deep .mint-searchbar-inner {
+#search {
+  height: 56px;
+  background-color: #d9d9d9;
+
+  input {
     border-radius: 20px;
     font-size: 24px;
     border: 2px solid #fd5d1c;
-    //放大镜
-    i {
-      font-size: 24px;
-      color: #d9d9d9;
-    }
+    position: relative;
+    float: left;
+    width: 65%;
+    height: 33px;
+    margin: 8px 0;
+    margin-left: 10px;
+    padding-left: 35px;
   }
-  //搜索二字
-  ::v-deep .mint-searchbar-cancel {
+  //放大镜
+  i {
+    font-size: 24px;
+    color: #d9d9d9;
+    position: absolute;
+    top: 15px;
+    left: 20px;
+  }
+  //搜索按钮
+  #searchButton {
     border: 2px solid #fd5d1c;
     padding: 4px 6px;
     border-radius: 23px;
@@ -74,8 +77,11 @@ export default {
     text-align: center;
     height: 15px;
     line-height: 15px;
+    float: right;
+    margin: 14px 10px 0 0;
   }
 }
+
 // 版心
 #content {
   margin: 20px;
@@ -88,17 +94,19 @@ export default {
       padding-left: 10px;
       color: black;
     }
-    li {
-      float: left;
-      padding: 4px 10px;
-      border-radius: 23px;
-      font-size: 13px;
-      color: #8d8d8d;
-      background-color: #f8f8f8;
-      text-align: center;
-      height: 15px;
-      line-height: 15px;
-      margin: 0 15px 15px 0;
+    ul {
+      ::v-deep li {
+        float: left;
+        padding: 4px 10px;
+        border-radius: 23px;
+        font-size: 13px;
+        color: #8d8d8d;
+        background-color: #f8f8f8;
+        text-align: center;
+        height: 15px;
+        line-height: 15px;
+        margin: 0 15px 15px 0;
+      }
     }
   }
 }

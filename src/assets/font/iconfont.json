@@ -6,6 +6,27 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "926959",
+      "name": "二手设备",
+      "font_class": "ershoushebei",
+      "unicode": "e60a",
+      "unicode_decimal": 58890
+    },
+    {
+      "icon_id": "1014926",
+      "name": "推荐",
+      "font_class": "tuijian",
+      "unicode": "e60e",
+      "unicode_decimal": 58894
+    },
+    {
+      "icon_id": "1166722",
+      "name": "放大镜",
+      "font_class": "fangdajing",
+      "unicode": "e63d",
+      "unicode_decimal": 58941
+    },
+    {
       "icon_id": "1638357",
       "name": "首页",
       "font_class": "shouye",
@@ -25,6 +46,34 @@
       "font_class": "tubiaolunkuo-",
       "unicode": "e609",
       "unicode_decimal": 58889
+    },
+    {
+      "icon_id": "4166087",
+      "name": "购物车",
+      "font_class": "gouwuche",
+      "unicode": "e610",
+      "unicode_decimal": 58896
+    },
+    {
+      "icon_id": "5439974",
+      "name": "我的",
+      "font_class": "wode",
+      "unicode": "e63a",
+      "unicode_decimal": 58938
+    },
+    {
+      "icon_id": "7100359",
+      "name": "商品分类",
+      "font_class": "shangpinfenlei",
+      "unicode": "e724",
+      "unicode_decimal": 59172
+    },
+    {
+      "icon_id": "7463927",
+      "name": "我的",
+      "font_class": "wode1",
+      "unicode": "e626",
+      "unicode_decimal": 58918
     }
   ]
 }
