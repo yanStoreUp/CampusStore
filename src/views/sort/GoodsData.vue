@@ -1,5 +1,8 @@
 <template>
   <div>
+    <!-- 顶部 -->
+    <mt-header fixed title="购物车" id="top"></mt-header>
+    <div @click="back()" id="back">&lt;返回</div>
     <div class="goodsimg">
       <img :src= sortGoods.coverImgUrl>
     </div>
@@ -21,7 +24,6 @@
 </template>
 <script>
 import { MessageBox } from "mint-ui";
-import {goodsData} from '../../services/goodsData'
 import {shopCarAdd} from '../../services/shopcar'
 export default {
   data() {
@@ -33,8 +35,10 @@ export default {
     };
   },
   methods: {
+    back(){
+      this.$router.go(-1)
+    },
     add(x) {
-      console.log(x)
       shopCarAdd(x)
       // 添加购物车的提示
       if (this.flag) {
@@ -73,8 +77,10 @@ export default {
 </script>
 
 <style lang="less">
+
 .goodsimg {
   img {
+    margin-top: 40px;
     width: 100vw;
     height: 30vh;
   }
@@ -85,12 +91,10 @@ export default {
     color: red;
   }
   #goodsShow {
-    p {
       img {
         margin-left: 1vw;
-        width: 46vw !important;
+        width: 45vw !important;
         height: 30vh;
-      }
     }
   }
 }

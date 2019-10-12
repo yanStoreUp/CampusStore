@@ -1,7 +1,8 @@
 <template>
   <div id="box">
     <!-- 顶部 -->
-    <mt-header fixed title="购物车"></mt-header>
+    <mt-header fixed title="购物车" id="top"></mt-header>
+    <div @click="back()" id="back">&lt;返回</div>
     <!-- 左边分类 -->
     <div id="left">
       <li @click="getSort(value)" class="leftSort" ref="leftSort" v-for="value in sortLeftData" :key="value.id">{{value.name}}</li>
@@ -15,7 +16,7 @@
         <!-- 商品图片 -->
         <img  :src=value.coverImgUrl alt="">
         <!-- 商品名称 -->
-        <div>{{value.name}}</div>
+        <div id="goodsTitle">{{value.name}}</div>
       </div>
     </div>
   </div>
@@ -43,6 +44,9 @@ export default {
     });
   },
   methods: {
+    back(){
+      this.$router.go(-1)
+    },
     getSort(x) {
       // 初始化分类商品列表
       this.goodsArr = []
@@ -99,7 +103,6 @@ export default {
   //   height: 500px;
   width: calc(100vw - 100px);
   margin-left: 100px;
-  background-color: tomato;
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
@@ -112,7 +115,7 @@ export default {
   .goodsList {
     margin: 15px 5px 5px 5px;
     overflow: hidden;
-    background-color: orange;
+    background-color: #EA5F5A;
     border-radius: 10px;
     img{
       width: 30vw;
@@ -120,6 +123,12 @@ export default {
     }
     div{
       text-align: center;
+    }
+    #goodsTitle{
+      width: 30vw;
+      white-space:nowrap;
+      text-overflow:ellipsis;
+      overflow: hidden;
     }
   }
 }
