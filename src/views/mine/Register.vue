@@ -7,7 +7,7 @@
     </mt-header>
 
     <div class="box">
-      <div class="logo">这是logo的地方</div>
+      <div class="logo"><img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1570856902854&di=79c3edcfc3560a55137a8956a5916e7d&imgtype=0&src=http%3A%2F%2Fimg.yzcdn.cn%2Fupload_files%2F2015%2F11%2F02%2F45112c8c649dc9b99d259e2c85c8592e.jpeg" alt=""></div>
       <el-row type="flex" justify="center" class="boxs">
         <el-form ref="loginForm" :model="user" status-icon label-width="80px">
           <el-form-item label="用户名" prop="name">
@@ -24,7 +24,7 @@
           <mt-button type="default" class="forget" size="small">忘记密码</mt-button>
           </router-link>
           <router-link to="/enroll">
-          <mt-button type="default" class="forget" size="small">重新注册</mt-button>
+          <mt-button type="default" class="forget" size="small">马上注册</mt-button>
           </router-link>
           </div>
         </el-form>
@@ -71,7 +71,7 @@ export default {
 
 <style lang="less" >
 #subject {
-  background-color: #ea5f5a;
+  background-color: #EA3D1D;
 }
 
 .box {
@@ -81,6 +81,10 @@ export default {
     height: 200px;
     background-color: red;
     margin: 20px auto;
+    img {
+      width: 200px;
+      height: 200px;
+    }
   }
   .forget {
     width: 80%;

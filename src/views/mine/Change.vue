@@ -11,49 +11,48 @@
       <el-upload
         id="head"
         class="avatar-uploader"
-        action="https://jsonplaceholder.typicode.com/posts/"
+        action="/api/system/user/profile/update/avatar/nos"
         :show-file-list="false"
         :on-success="handleAvatarSuccess"
         :before-upload="beforeAvatarUpload"
+        name="avatarfile"
       >
         <img v-if="imageUrl" :src="imageUrl" class="avatar" />
         <i v-else class="el-icon-plus avatar-uploader-icon" id="heads"></i>
       </el-upload>
 
-      
-      
       <p class="birthday userName">
         <span class="left">昵称:</span>
-        <span class="matter"><span></span>{{ msguserName }}</span>
-        <el-input v-model="input" placeholder="修改你的昵称" class="inputs"></el-input>
+        <span class="matter"><span class="original">原:</span>{{ msguserName }}</span>
+        <el-input v-model="userName" placeholder="修改你的昵称" class="inputs" ></el-input>
 
       </p>
       <p class="birthday email">
         <span class="left">邮箱</span>
-        <span class="matter">{{ msgemail }}</span>
-        <el-input v-model="input" placeholder="修改你的邮箱" class="inputs"></el-input>
+        <span class="matter"><span class="original">原:</span>{{ msgemail }}</span>
+        <el-input v-model="email" placeholder="修改你的邮箱" class="inputs" ></el-input>
 
       </p>
       <p class="birthday phonenumber">
         <span class="left">电话号码</span>
-        <span class="matter">{{ msgphonenumber }}</span>
-        <el-input v-model="input" placeholder="修改你的电话号码" class="inputs"></el-input>
+        <span class="matter"><span class="original">原:</span>{{ msgphonenumber }}</span>
+        <el-input v-model="phonenumber" placeholder="修改你的电话号码" class="inputs" ></el-input>
 
       </p>
       <p class="birthday sex">
         <span class="left">性别</span>
-        <span class="matter">{{ msgsex }}</span>
-        <el-input v-model="input" placeholder="修改你的性别" class="inputs"></el-input>
+        <span class="matter"><span class="original">原:</span>{{ msgsex }}</span>
+        <el-input v-model="sex" placeholder="修改你的性别" class="inputs" ></el-input>
 
       </p>
       <p class="birthday remark">
-        <span class="left">备注</span>
-        <span class="matter">{{ msgremark }}</span>
-        <el-input v-model="input" placeholder="修改你的备注" class="inputs"></el-input>
+        <span class="left">个性签名</span>
+        <span class="matter"><span class="original">原:</span>{{ msgremark }}</span>
+        <el-input v-model="remark" placeholder="个性签名" class="inputs" ></el-input>
         
       </p>
       <router-link to="/change">
-      <mt-button type="primary" id="logon">修改信息</mt-button>
+      <mt-button type="primary" id="logon" @click.native.capture="submits()">修改信息</mt-button>
       </router-link>
     
     </div>
@@ -62,7 +61,7 @@
 
 
 <script>
-import { gitExamine } from "@/services/mine.js";
+import { gitExamine,gitPerson,gitavatar} from "@/services/mine.js";
 
 export default {
   data() {
@@ -73,41 +72,68 @@ export default {
       msgphonenumber: "",
       msgsex: "",
       msgremark: "",
-      msgavatar: ""
+      userName: "",
+      email: "",
+      phonenumber: "",
+      sex: "",
+      remark: "",
+      avatar: "",
+      
+      
     };
   },
   methods: {
-    handleAvatarSuccess(res, file) {
-      this.imageUrl = URL.createObjectURL(file.raw);
+    handleAvatarSuccess(res, avatarfile) {
+      this.imageUrl = URL.createObjectURL(avatarfile.raw);
     },
-    beforeAvatarUpload(file) {
-      const isJPG = file.type === "image/jpeg";
-      const isLt2M = file.size / 1024 / 1024 < 2;
-
+    beforeAvatarUpload(avatarfile) {
+    
+      const isJPG = avatarfile.type === "image/jpeg";
+      const isLt2M = avatarfile.size / 1024 / 1024 < 2;
       if (!isJPG) {
         this.$message.error("上传头像图片只能是 JPG 格式!");
       }
       if (!isLt2M) {
         this.$message.error("上传头像图片大小不能超过 2MB!");
       }
-      return isJPG && isLt2M;
-    }
+      return isJPG && isLt2M;   
+    },
+   
+
+    submits() {
+    gitPerson(this.userName,this.email,this.phonenumber,this.sex,this.remark).then(res => {
+      if (res.code == 0) {
+              this.$notify({
+              type: 'success',
+              message: '操作成功!',
+              duration: 3000 
+          })
+          this.$router.replace('/personal')                              
+      } else {
+          this.$message({
+          type: 'error',
+          message: '修改失败！',
+        })  
+      }
+    })
+  
+},
   },
   beforeMount() {
     gitExamine().then(res => {
       this.msguserName = res.data.userName;
       this.msgemail = res.data.email;
       this.msgphonenumber = res.data.phonenumber;
-      this.msgloginName = res.data.loginName;
+      this.msgmsgsex = res.data.msgsex;   
       this.msgremark = res.data.remark;
-      this.msgavatar = res.data.avatar;
-    });
+      this.imageUrl = res.data.avatar;
+    })
   }
-};
+}
 </script>
 <style lang="less">
 #subject {
-  background-color: #ea5f5a;
+  background-color: #EA3D1D;
 }
 .box {
   margin-top: 60px;
@@ -122,13 +148,17 @@ export default {
     padding: 10px;
   }
   .left {
-    width: 35%;
+    width: 26%;
     display: inline-block;
   }
   .matter {
-    width: 65%;
+    width: 74%;
     display: inline-block;
+    .original {
+    margin-right: 10px;
   }
+  }
+  
 
   .el-upload__input {
     visibility: hidden;
@@ -164,8 +194,8 @@ export default {
   text-align: center;
 }
 .avatar {
-  width: 178px;
-  height: 178px;
+  width: 150px !important; 
+  height: auto;
   display: block;
 }
 a {

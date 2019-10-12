@@ -11,10 +11,11 @@
       <el-upload
         id="head"
         class="avatar-uploader"
-        action="https://jsonplaceholder.typicode.com/posts/"
+        action="/api/system/user/profile/update/avatar/nos"        
         :show-file-list="false"
         :on-success="handleAvatarSuccess"
         :before-upload="beforeAvatarUpload"
+        name="avatarfile"
       >
         <img v-if="imageUrl" :src="imageUrl" class="avatar" />
         <i v-else class="el-icon-plus avatar-uploader-icon" id="heads"></i>
@@ -46,7 +47,7 @@
         <span class="matter">{{ msgsex }}</span>
       </p>
       <p class="birthday remark">
-        <span class="left">备注</span>
+        <span class="left">个性签名</span>
         <span class="matter">{{ msgremark }}</span>
       </p>
       <router-link to="/change">
@@ -75,23 +76,28 @@ export default {
     };
   },
   methods: {
-    handleAvatarSuccess(res, file) {
-      this.imageUrl = URL.createObjectURL(file.raw);
+    handleAvatarSuccess(res, avatarfile) {
+      this.imageUrl = URL.createObjectURL(avatarfile.raw);
     },
-    beforeAvatarUpload(file) {
-      const isJPG = file.type === "image/jpeg";
-      const isLt2M = file.size / 1024 / 1024 < 2;
-
+    beforeAvatarUpload(avatarfile) {
+    
+      const isJPG = avatarfile.type === "image/jpeg";
+      const isLt2M = avatarfile.size / 1024 / 1024 < 2;
       if (!isJPG) {
         this.$message.error("上传头像图片只能是 JPG 格式!");
       }
       if (!isLt2M) {
         this.$message.error("上传头像图片大小不能超过 2MB!");
       }
-      return isJPG && isLt2M;
-    }
+      return isJPG && isLt2M;   
+    },
+
   },
+
+
+
   beforeMount() {
+    
     gitExamine().then(res => {
       this.msgloginName = res.data.loginName;
       this.msguserName = res.data.userName;
@@ -99,14 +105,14 @@ export default {
       this.msgphonenumber = res.data.phonenumber;
       this.msgloginName = res.data.loginName;
       this.msgremark = res.data.remark;
-      this.msgavatar = res.data.avatar;
+      this.imageUrl = res.data.avatar;
     });
   }
 };
 </script>
 <style lang="less">
 #subject {
-  background-color: #ea5f5a;
+  background-color: #EA3D1D;
 }
 .box {
   margin-top: 60px;

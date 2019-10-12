@@ -11,7 +11,7 @@
           <span @click="selected(value)" :class="[!value.selected?'cir':'cirAll']"></span>
         </div>
         <div>
-          <img src="../../../../public/imag/5.jpg" alt />
+          <!-- <img src="../../../../public/imag/5.jpg" alt /> -->
         </div>
         <div class="title">
           <p>{{value.nm}}</p>

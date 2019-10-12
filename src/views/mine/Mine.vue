@@ -8,18 +8,9 @@
 
     <div class="box">
       <!-- 上传头像 -->
-      <el-upload
-        id="head"
-        class="avatar-uploader"
-        action="/api/system/user/profile/update/avatar/nos"
-        :show-file-list="false"
-        name="avatarfile"
-        :on-success="handleAvatarSuccess"
-        :before-upload="beforeAvatarUpload"
-      >
+      <div id="head">
         <img v-if="imageUrl" :src="imageUrl" class="avatar" />
-        <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-      </el-upload>
+      </div>
 
       <!-- 使用 router-link 组件来导航. -->
       <!-- 通过传入 `to` 属性指定链接. -->
@@ -42,8 +33,8 @@
       </p>
       <!-- 注销 -->
       <p class="history Hbut">
-        <router-link to="/register"
-          ><mt-button type="danger" class="logon">注销</mt-button></router-link
+        <mt-button type="danger" class="logon" @click="writeOff"
+          >注销</mt-button
         >
       </p>
 
@@ -60,8 +51,8 @@
 
 
 <script>
-import { gitExamine } from "@/services/mine.js";
-
+import { gitExamine, gitLogout } from "@/services/mine.js";
+var isLogon = 0;
 export default {
   data() {
     return {
@@ -70,28 +61,32 @@ export default {
       msgavatar: ""
     };
   },
-  methods: {
-    handleAvatarSuccess(res, file) {
-      this.imageUrl = URL.createObjectURL(file.raw);
-    },
-    beforeAvatarUpload(file) {
-      const isJPG = file.type === "image/jpeg";
-      const isLt2M = file.size / 1024 / 1024 < 2;
-
-      if (!isJPG) {
-        this.$message.error("上传头像图片只能是 JPG 格式!");
-      }
-      if (!isLt2M) {
-        this.$message.error("上传头像图片大小不能超过 2MB!");
-      }
-      return isJPG && isLt2M;
-    }
-  },
   beforeMount() {
     gitExamine().then(res => {
-      this.msguserName = res.data.userName;
-      this.msgavatar = res.data.avatar;
+      isLogon = res.code;
+      if (isLogon == 500) {
+        this.$notify({
+        type: "success",
+        message: "请先登录!",
+        duration: 3000
+      });
+        this.$router.push("/register");
+      } else {
+        this.msguserName = res.data.userName;
+        this.imageUrl = res.data.avatar;
+      }
     });
+  },
+  methods: {
+    writeOff() {
+      gitLogout();
+      this.$notify({
+        type: "success",
+        message: "注销成功!",
+        duration: 3000
+      });
+      this.$router.replace("/register");
+    }
   }
 };
 </script>
@@ -100,7 +95,7 @@ export default {
 //     background-image: url("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1570619519934&di=951ac4c170dfe05b759e99b3fb501608&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fblog%2F201409%2F14%2F20140914005104_TsBrF.jpeg")
 // }
 #subject {
-  background-color: #ea5f5a;
+  background-color: #ea3d1d;
 }
 
 .box {
@@ -109,6 +104,8 @@ export default {
     width: 150px;
     margin: 5px auto;
     height: 150px;
+    overflow: hidden;
+    border-radius: 50%;
   }
   .name {
     width: 100px;
@@ -135,41 +132,12 @@ export default {
     margin-top: 60px;
   }
 
-  .el-upload__input {
-    visibility: hidden;
-  }
   .mint-button--large {
     width: 80%;
     margin: 10px auto;
   }
-  .el-upload {
-    height: 200px;
-  }
 }
 
-.avatar-uploader .el-upload {
-  border-radius: 50%;
-  border: 1px dashed #d9d9d9;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-}
-.avatar-uploader .el-upload:hover {
-  border-color: #409eff;
-}
-.avatar-uploader-icon {
-  font-size: 28px;
-  color: #8c939d;
-  width: 178px;
-  height: 178px;
-  line-height: 178px;
-  text-align: center;
-}
-.avatar {
-  width: 178px;
-  height: 178px;
-  display: block;
-}
 a {
   text-decoration: none;
   color: #333;

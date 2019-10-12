@@ -14,16 +14,11 @@
         <div class="box">
 
 
-<!-- 上传头像 -->
-    <el-upload id="head"
-  class="avatar-uploader"
-  action="https://jsonplaceholder.typicode.com/posts/"
-  :show-file-list="false"
-  :on-success="handleAvatarSuccess"
-  :before-upload="beforeAvatarUpload">
-  <img v-if="imageUrl" :src="imageUrl" class="avatar">
-  <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-</el-upload>
+    <div id="imgs">
+
+<img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1570869988818&di=33331d50bb607b91bd300857776b8f2b&imgtype=0&src=http%3A%2F%2Fimgnews.mumayi.com%2Ffile%2F2019%2F05%2F27%2F855173339c3a4158ba6839171720d76e.jpg" alt="">
+
+    </div>
 
 
 
@@ -74,7 +69,7 @@
             </mt-field>
 
 
-            <mt-field label="备注" placeholder="请输入备注" v-model="code"></mt-field>
+            <mt-field label="个性签名" placeholder="个性签名" v-model="code"></mt-field>
 
 
             <mt-button type="primary" id="logon" @click="uploading">点击注册</mt-button>
@@ -121,30 +116,12 @@
                 msgphonenumbere: '',
                 recur: '',
                 msgrecur: '',
-                imageUrl: '',
+
             }
 
         },
 
         methods: {
-            handleAvatarSuccess(res, file) {
-        this.imageUrl = URL.createObjectURL(file.raw);
-      },
-      beforeAvatarUpload(file) {
-        const isJPG = file.type === 'image/jpeg';
-        const isLt2M = file.size / 1024 / 1024 < 2;
-
-        if (!isJPG) {
-          this.$message.error('上传头像图片只能是 JPG 格式!');
-        }
-        if (!isLt2M) {
-          this.$message.error('上传头像图片大小不能超过 2MB!');
-        }
-        return isJPG && isLt2M;
-      },
-   
-
-
             hintName() {
 
                 if (this.loginName.length == 0) {
@@ -283,35 +260,24 @@
 </script>
 <style lang="less">
     #subject {
-        background-color: #EA5F5A;
+        background-color: #EA3D1D;
     }
     .box {
-        margin-top: 60px;
+        margin-top: 50px;
         padding-left: 5px;
         padding-right: 5px;
-    #head {
-    width: 150px;
-    margin: 5px auto;
-    height: 150px;
-        .el-upload {
-            width: 150px;
-            height: 150px; 
+        #imgs {
+            width: 278px;
+            margin: 0 auto;
+            img {
+                width: 100%;
+            }
         }
-    }
-    
-    .avatar-uploader-icon {
-    width: 150px;
-    height: 150px;  
-    visibility: hidden; 
-    
-    }
-
         #logon {
 
             width: 80%;
 
             margin: 0px 10%
-
         }
 
         .hint {
@@ -334,9 +300,9 @@
 
             color: white;
 
-            border: 1px solid #EA5F5A;
+            border: 1px solid #EA3D1D;
 
-            background-color: #EA5F5A;
+            background-color: #EA3D1D;
 
             outline: none;
 
