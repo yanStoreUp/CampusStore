@@ -131,6 +131,9 @@ export default {
 
 //底部导航
 #footer {
+  position: fixed; 
+  top: calc(100vh - 55px);
+  left: 0;
   span {
     font-size: 20px;
   }
