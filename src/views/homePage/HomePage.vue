@@ -118,19 +118,15 @@ export default {
     //获取二手商品列表
     getOldGoodsList().then(res => {
       this.oldGoods = res.rows;
-      console.log(this.oldGoods);
     });
     //获取商品列表
     getManyGoodsList().then(res => {
       this.goodsList = res.rows;
-      console.log(this.goodsList)
       this.ulLeftList.push(this.goodsList.shift());
     });
     //获取轮播图列表
     getShufflingList().then(res => {
       this.shufflingList = res.rows;
-      console.log(111111111111111111)
-      console.log(this.shufflingList)
     });
   }
 };

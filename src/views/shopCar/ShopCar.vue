@@ -7,97 +7,133 @@
         <span @click="allSelected()" :class="[flag?'cir':'cirAll']"></span>
         <span>全选</span>
       </div>
-      <div class="shopCarBox" v-for="value in inShopCar" :key="value.goodsId">
-        <div>
-          <span @click="selected(value)" :class="[!value.selected?'cir':'cirAll']"></span>
+      <div class="shopCarBox" v-for="(value,index) in inShopCar" :key="index">
+        <div id="first">
+          <span @click="selected(value,index)" :class="[!value.selected?'cir':'cirAll']"></span>
         </div>
         <div>
           <img :src="value.coverImg" alt />
         </div>
         <div class="title">
           <p>{{value.goodsName}}</p>
-          <span @click="shopCarAdd(value.goodsId)">-</span>
+          <span @click="shopCarAdd(index)">-</span>
           <span>{{value.num}}</span>
-          <span @click="shopCarSub(value.goodsId)">+</span>
+          <span @click="shopCarSub(index)">+</span>
           <p>￥{{value.price}}</p>
+        </div>
+        <div>
+          <div @click="delGoods(index)" class="el-icon-delete"></div>
         </div>
       </div>
     </div>
     <div class="footer">
-      <span>&nbsp;总价:</span><span>￥{{settlement}}</span>
-      <div class="Settlement">
-          送货上门
+      <span>&nbsp;总价:</span>
+      <span>￥{{settlement}}</span>
+      <div @click="send = true" class="Settlement">送货上门</div>
+    </div>
+    <div v-show="send" id="send">
+      <div id="sendBox">
+        <el-input id="phone" v-model="phone" placeholder="请输入手机号"></el-input>
+        <el-input id="address" v-model="address" placeholder="收货地址"></el-input>
+        <p>总价：￥{{settlement}}</p>
+        <el-button @click="send = false" id="sure" type="info" round>取消</el-button>
+        <el-button @click="sendOrder()" id="cancel" type="success" round>确定</el-button>
       </div>
     </div>
   </div>
 </template>
 <script>
-
+import { MessageBox } from "mint-ui";
 import {
   shopCarGoods,
   shopCarDel,
-  shopCarChange
+  shopCarChange,
+  shopCarSettlementApi
 } from "../../services/shopcar";
 import sort from "../../services/sort";
 export default {
   data() {
     return {
+      phone: "",
+      address: "",
+      send: false,
       flag: true,
       inShopCar: [],
       selectedGoodsList: [],
-      settlement:0
+      settlement: 0
     };
   },
-  watch:{
-    selectedGoodsList:{
-      handler(){
-      this.settlement = 0;
-      this.selectedGoodsList.forEach(v =>{
-        this.settlement += v.price * v.num
-      })
+  watch: {
+    selectedGoodsList: {
+      handler() {
+        this.settlement = 0;
+        this.selectedGoodsList.forEach(v => {
+          this.settlement += v.price * v.num;
+        });
       },
-      immediate:true,
-      deep:true,
+      immediate: true,
+      deep: true
     }
   },
   methods: {
-    back(){
-      this.$router.go(-1)
+    // 提价订单
+    sendOrder() {
+      this.settlement = 0;
+      MessageBox("提示", "结算成功");
+      this.selectedGoodsList.forEach(v => {
+        shopCarDel(v.shoppingCartId).then(res => {
+          // 如果后台购物车商品删除成功操作成功的
+          if (res.code == 0) {
+            shopCarGoods().then(res => {
+              this.inShopCar = res.list;
+            });
+          }
+        });
+      });
+      let goodsList = JSON.stringify(this.selectedGoodsList);
+      // console.log(goodsList);
+      shopCarSettlementApi(
+        goodsList,
+        this.address,
+        this.phone,
+        this.settlement
+      );
+      this.send = false;
+    },
+    // 删除商品
+    delGoods(x) {
+      // console.log(x)
+      shopCarDel(this.inShopCar[x].shoppingCartId).then(res => {
+        // 如果后台购物车商品删除成功操作成功的
+        if (res.code == 0) this.inShopCar.splice(x, 1);
+      });
+    },
+    // 返回上一级
+    back() {
+      this.$router.go(-1);
     },
     // 购物车减少货物
     shopCarAdd(x) {
-    debugger
-      this.inShopCar.forEach(v => {
-        if (v.goodsId == x) {
-          if (v.num <= 1) {
-            shopCarDel(v.shoppingCartId);
-            // // 刷新页面不然看不见移除商品
-            // this.$router.go(0);
-            shopCarGoods().then(res => {
-              this.inShopCar = res.list;
-            })
-          } else {
-            v.num--;
-            shopCarChange(v.shoppingCartId, v.num);
-          }
-        }
-      })
+      if (this.inShopCar[x].num <= 1) {
+        shopCarDel(this.inShopCar[x].shoppingCartId).then(res => {
+          if (res.code == 0) this.inShopCar.splice(x, 1);
+        });
+      } else {
+        this.inShopCar[x].num -= 1;
+        shopCarChange(this.inShopCar[x].shoppingCartId, this.inShopCar[x].num);
+      }
     },
     // 购物车增加货物
     shopCarSub(x) {
-      this.inShopCar.forEach(v => {
-        if (v.goodsId == x) {
-          v.num++;
-          shopCarChange(v.shoppingCartId, v.num);
-        }
-      });
+      // console.log(this.inShopCar[x])
+      this.inShopCar[x].num += 1;
     },
     //控制全选
     allSelected() {
       this.flag = !this.flag;
       if (!this.flag) {
         // 若果点了全选 就将购物车里所有对象值放入选中清单
-        this.selectedGoodsList = Object.values(this.inShopCar);
+        this.selectedGoodsList = this.inShopCar;
         this.selectedGoodsList.forEach(v => {
           // 将所有商品表示选中的标志改成选中
           v.selected = true;
@@ -113,7 +149,7 @@ export default {
       }
     },
     // 控制单间货物的选取
-    selected(x) {
+    selected(x, y) {
       //判断代表选中货物的数组里是否存在所操作货物
       if (
         this.selectedGoodsList.some(v => {
@@ -138,22 +174,53 @@ export default {
     // 将购物车商品从后台取出放入列表中
     shopCarGoods().then(res => {
       this.inShopCar = res.list;
-      sort.sortArr().then(res => {
-        this.inShopCar.forEach(v => {
-          res.rows.forEach(z => {
-            // 如果商品是购物车里的商品
-            if (v.goodsId == z.goodsId) {
-              v.price = z.price;
-            }
-          });
-        });
-      });
     });
   }
 };
 </script>
 <style lang="less">
-#back{
+#send {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 8000;
+  height: 100vh;
+  width: 100vw;
+  background: rgba(0, 0, 0, 0.5);
+  #sendBox {
+    width: 90vw;
+    height: 45vh;
+    margin: 18vh 5vw 0;
+    background-color: #f2f2f2;
+    border-radius: 10px;
+    #phone {
+      width: 80vw;
+      margin: 4vh 5vw 0;
+      border: 1px solid #ea5f5a;
+    }
+    #address {
+      width: 80vw;
+      margin: 8vh 5vw 0;
+      border: 1px solid #ea5f5a;
+    }
+    p {
+      height: 10vh;
+      width: 80vw;
+      margin: 8vh 5vw 0;
+    }
+    #sure {
+      position: fixed;
+      top: 70vh;
+      left: calc(50vw - 145px);
+    }
+    #cancel {
+      position: fixed;
+      top: 70vh;
+      left: calc(50vw + 80px);
+    }
+  }
+}
+#back {
   text-indent: 10px;
   position: fixed;
   top: 0;
@@ -164,12 +231,12 @@ export default {
   color: white;
   z-index: 5000;
 }
-#top{
-  background: #EA5F5A;
+#top {
+  background: #ea5f5a;
 }
 .shopCarGoods {
   height: 20vh;
-  margin: 50px 0px 0 10px;
+  padding: 50px 0px 0 10px;
   .cir {
     display: inline-block;
     width: 6vw;
@@ -190,7 +257,8 @@ export default {
     flex-direction: row;
     div:nth-of-type(1) {
       height: 20vh;
-      margin-top: calc(15vh - 17px);
+      margin-top: calc(15vh - 37px);
+      font-size: 30px;
     }
     img {
       margin: 5vw 5vw 0 5vw;
@@ -198,6 +266,7 @@ export default {
       height: 18vh;
     }
     .title {
+      width: 30vw;
       p {
         font-size: 4vw;
       }
@@ -214,19 +283,19 @@ export default {
     }
   }
 }
-.footer{
+.footer {
   width: 100vw;
   height: 10vh;
-  background: #EA5F5A;
+  background: #ea5f5a;
   position: fixed;
   top: calc(90vh - 55px);
   left: 0;
-  span{
-      height: 10vh;
-      line-height: 10vh;
-      font-size: 25px;
-    }
-  .Settlement{
+  span {
+    height: 10vh;
+    line-height: 10vh;
+    font-size: 25px;
+  }
+  .Settlement {
     float: right;
     width: 40vw;
     height: 10vh;
@@ -235,8 +304,7 @@ export default {
     color: white;
     line-height: 10vh;
     text-align: center;
-    font-weight:bold;
-
+    font-weight: bold;
   }
 }
 </style>
