@@ -64,11 +64,11 @@ export default {
     },
     //获取商品id放入store中用来渲染商品详情页面
     getGoodsId(x){
-      console.log(x)
+      // console.log(x)
       // this.$store.commit('gerGoodsId',{ran:x})
       this.$router.push({
         path:'/goodsData',
-        query:{id:x}
+        query:{obj:x}
         })
     } 
     // 改变选中样式
