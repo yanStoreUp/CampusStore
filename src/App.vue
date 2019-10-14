@@ -2,7 +2,6 @@
   <div>
     <!-- 顶部导航 -->
     <!-- <mt-header fixed :title="title"></mt-header> -->
-    
 
     <!-- 中间部分 -->
     <div class="main">
@@ -12,10 +11,10 @@
     </div>
 
     <!--底部导航-->
-    <mt-tabbar v-model="selected">
+    <mt-tabbar v-model="selected" id="footer">
       <mt-tab-item id="HomePage">
         <!-- <img slot="icon" src="../assets/100x100.png" /> -->
-        <span slot="icon" class="iconfont icon-shouye"></span>
+        <span slot="icon" class="iconfont icon-shouye1" style="font-size:"></span>
         首页
       </mt-tab-item>
       <mt-tab-item id="Sort">
@@ -27,7 +26,7 @@
         购物车
       </mt-tab-item>
       <mt-tab-item id="Mine">
-        <span slot="icon" class="iconfont icon-wode"></span>
+        <span slot="icon" class="iconfont icon-wode2"></span>
         我的
       </mt-tab-item>
     </mt-tabbar>
@@ -47,9 +46,9 @@ export default {
       this.selected = "HomePage";
     } else if (this.$route.path == "/sort") {
       this.selected = "Sort";
-    }else if (this.$route.path == "/shopCar") {
+    } else if (this.$route.path == "/shopCar") {
       this.selected = "ShopCar";
-    }else if (this.$route.path == "/mine") {
+    } else if (this.$route.path == "/mine") {
       this.selected = "Mine";
     }
   },
@@ -59,12 +58,11 @@ export default {
         this.$router.push({ path: "/homePage" });
       } else if (newVal == "Sort" && this.$route.push != "/sort") {
         this.$router.push({ path: "/sort" });
-      }else if (newVal == "ShopCar" && this.$route.push != "/shopCar") {
+      } else if (newVal == "ShopCar" && this.$route.push != "/shopCar") {
         this.$router.push({ path: "/shopCar" });
-      }else if (newVal == "Mine" && this.$route.push != "/mine") {
+      } else if (newVal == "Mine" && this.$route.push != "/mine") {
         this.$router.push({ path: "/mine" });
       }
-
     },
     $router(newVal) {
       if (isNotBlank(newVal.meta.title)) {
@@ -78,7 +76,7 @@ export default {
 .main {
   width: 100%;
   overflow-x: hidden;
-  height: calc(100vh - 55px);    //减去底部的高度
+  height: calc(100vh - 55px); //减去底部的高度
 }
 .app-router-enter,
 .app-router-leave-to {
@@ -93,23 +91,28 @@ export default {
   transition: all 0.4s ease;
 }
 
-  
-  #app {
-    font-family: "Avenir", Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-align: center;
+#app {
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+}
+#nav {
+  padding: 30px;
+  a {
+    font-weight: bold;
     color: #2c3e50;
-  }
-  #nav {
-    padding: 30px;
-    a {
-      font-weight: bold;
-      color: #2c3e50;
-      &.router-link-exact-active {
-        color: #42b983;
-      }
+    &.router-link-exact-active {
+      color: #42b983;
     }
-  
+  }
+}
+
+//底部导航
+#footer {
+  span {
+    font-size: 20px;
+  }
 }
 </style>

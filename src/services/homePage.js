@@ -7,11 +7,6 @@ function getOldGoodsList() {
    return http.post('/api/shop/shopGoods/open/used/list');
 }
 
-// 短信验证
-// function gitnote(mobile) {
-//     return http.get(`/api/short-message/vcode/${mobile}`)
-// }
-
 
 // 获取商品列表
 function getManyGoodsList(){
@@ -23,8 +18,30 @@ function getShufflingList(){
     return http.get('/api/shop/shopGoods/open/banner/list')
 }
 
+// 推荐商品列表
+function getRecommendGoodsList(){
+    return http.post('/api/shop/shopGoods/open/recommend/list')
+}
+
+// 搜索关键字 
+function getSearchResultList(name){
+    let formdata=new FormData()
+    formdata.append('name',`${name}`)
+    return http.post('/api/shop/shopGoods/open/list',formdata)
+}
+
+
+// 搜索发现列表
+function getSearchFoundListList(){
+    return http.get('/api/shop/shopGoods/open/banner/list')
+}
+
+
 export {
     getOldGoodsList,
     getManyGoodsList,
     getShufflingList,
+    getRecommendGoodsList,
+    getSearchResultList,
+    getSearchFoundListList
 }
