@@ -20,6 +20,8 @@
     <div @click="add(sortGoods.goodsId)" id="addToCar">
       <span id="font" class="iconfont icon-gouwuche"></span>
     </div>
+    <el-alert v-show="flag&&show" id="addSuccess" title="加入购物车成功" type="success"></el-alert>
+    <el-alert v-show="flag&&!show" id="addFail" title="我已经在购物车里了，要是更改数量就去购物车里更改吧" type="warning"></el-alert>
   </div>
 </template>
 <script>
@@ -30,23 +32,35 @@ export default {
     return {
       // 该商品是否添加购物车了
       flag: false,
+      show: true,
       // 存放图片墙的地址的列表
-      imgWallList:[]
+      imgWallList:[],
+      // 该页面所展示商品
+      sortGoods:{}
     };
+  },
+  created(){
+    this.sortGoods = this.$route.query.obj
+    console.log(typeof this.sortGoods)
+    if(typeof this.sortGoods == 'string'){
+      this.$router.push({
+        path:'/sort'
+      })
+    }
   },
   methods: {
     back(){
       this.$router.go(-1)
     },
     add(x) {
-      shopCarAdd(x)
-      // 添加购物车的提示
-      if (this.flag) {
-        MessageBox("提示", "已经添加购物车，更改数量请去购物车中更改");
-      } else {
-        MessageBox("提示", "添加购物车成功!");
-      }
       this.flag = true;
+      shopCarAdd(x).then(res=>{
+        if(res.code == 0){
+          this.show = true;
+        }else{
+          this.show = false;
+        }
+      })
     },
     // 添加购物车时的动画
     beforeEnter(el) {
@@ -67,17 +81,16 @@ export default {
       done();
     }
   },
-  computed:{
-    // 获取到当前页面展示的商品
-    sortGoods(){
-      return this.$store.state.sortGoods
-    }
-  }
 };
 </script>
 
 <style lang="less">
-
+#addSuccess,#addFail{
+  z-index: 8000;
+  position: fixed;
+  top: 40px;
+  left: 0;
+}
 .goodsimg {
   img {
     margin-top: 40px;
@@ -107,6 +120,7 @@ export default {
   background: #EA5F5A;
   border-radius: 50%;
   #font {
+    color: white;
     font-size: 40px;
     margin-left: 20%;
     line-height: 80px;

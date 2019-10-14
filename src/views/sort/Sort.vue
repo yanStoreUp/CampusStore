@@ -12,7 +12,7 @@
       <!-- 商品分类的名称 -->
       <div class="goodsSort">{{sortName}}</div>
       <!-- 商品展示卡片 -->
-      <div @click="getGoodsId(value)" tag="div" class="goodsList" v-for="value in goodsArr" :key="value.id">
+      <div @click="getGoodsId(value)" class="goodsList" v-for="value in goodsArr" :key="value.id">
         <!-- 商品图片 -->
         <img  :src=value.coverImgUrl alt="">
         <!-- 商品名称 -->
@@ -63,8 +63,11 @@ export default {
     },
     //获取商品id放入store中用来渲染商品详情页面
     getGoodsId(x){
-      this.$store.commit('gerGoodsId',{ran:x})
-      this.$router.push({path:'/goodsData'})
+      // this.$store.commit('gerGoodsId',{ran:x})
+      this.$router.push({
+        path:'/goodsData',
+        query:{obj:x}
+        })
     } 
     // 改变选中样式
 
@@ -86,7 +89,7 @@ export default {
 #left {
   margin-top: 40px;
   float: left;
-  width: 100px;
+  width: 90px;
   li{
     height: 5vh;
     width: 94%;
@@ -108,6 +111,7 @@ export default {
   flex-wrap: wrap;
   flex-direction: row;
   .goodsSort {
+    text-indent: 5px;
     width: 100%;
     height: 30px;
     background-color: white;
