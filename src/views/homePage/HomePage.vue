@@ -12,7 +12,7 @@
     <!-- 轮播图 -->
     <mt-swipe id="topSwiper" :auto="4000">
       <mt-swipe-item v-for="item in shufflingList" :key="item.goodsId">
-        <img :src="item.coverImgUrl" alt @click="getGoodsId(item)" />
+        <img :src="item.coverImgUrl" alt @click="getGoodsId(item.goodsId)" />
       </mt-swipe-item>
     </mt-swipe>
 
@@ -30,7 +30,7 @@
             <el-row>
               <el-col :span="8" v-for="item in oldGoods" :key="item.goodsId">
                 <div id="liOut" class="grid-content bg-purple">
-                  <li @click="getGoodsId(item)">
+                  <li @click="getGoodsId(item.goodsId)">
                     <img :src="item.coverImgUrl" alt />
                     <div class="describe">{{item.name}}</div>
                     <div class="price">
