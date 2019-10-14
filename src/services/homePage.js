@@ -23,7 +23,7 @@ function getRecommendGoodsList(){
     return http.post('/api/shop/shopGoods/open/recommend/list')
 }
 
-// 搜索关键字 
+// 搜索关键字(根据关键字在后台调数据) 
 function getSearchResultList(name){
     let formdata=new FormData()
     formdata.append('name',`${name}`)

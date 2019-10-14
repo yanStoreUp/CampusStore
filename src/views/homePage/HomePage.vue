@@ -5,14 +5,14 @@
     <!-- 搜索 -->
     <div id="search">
       <router-link to="/search">
-        <mt-search placeholder="搜索"></mt-search>
+        <mt-search placeholder="搜索" autofocus></mt-search>
       </router-link>
     </div>
 
     <!-- 轮播图 -->
     <mt-swipe id="topSwiper" :auto="4000">
-      <mt-swipe-item v-for="item in shufflingList" :key="item.goodsId"  >
-        <img :src="item.coverImgUrl" alt @click='getGoodsId(item)'/>
+      <mt-swipe-item v-for="item in shufflingList" :key="item.goodsId">
+        <img :src="item.coverImgUrl" alt @click="getGoodsId(item)" />
       </mt-swipe-item>
     </mt-swipe>
 
@@ -30,12 +30,9 @@
             <el-row>
               <el-col :span="8" v-for="item in oldGoods" :key="item.goodsId">
                 <div id="liOut" class="grid-content bg-purple">
-                  <li @click='getGoodsId(item)'>
+                  <li @click="getGoodsId(item)">
                     <img :src="item.coverImgUrl" alt />
-                    <div class="describe">
-                      
-                      {{item.name}}
-                    </div>
+                    <div class="describe">{{item.name}}</div>
                     <div class="price">
                       <!-- <span class="recommend">抢</span> -->
                       <span style="font-size:8px;margin-right:-3px">￥</span>
@@ -56,7 +53,7 @@
           <!-- 瀑布流 -->
           <div id="pb">
             <ul class="ul1" ref="ulLeft">
-              <li v-for="item in ulLeftList" :key="item.goodsId" @click='getGoodsId(item)'>
+              <li v-for="item in ulLeftList" :key="item.goodsId" @click="getGoodsId(item.goodsId)">
                 <img :src="item.coverImgUrl" alt @load="onImageLoad()" />
                 <div class="describe">
                   <span>推荐</span>
@@ -70,7 +67,7 @@
               </li>
             </ul>
             <ul class="ul2" ref="ulRight">
-              <li v-for="item in ulRightList" :key="item.goodsId" @click='getGoodsId(item)'>
+              <li v-for="item in ulRightList" :key="item.goodsId" @click="getGoodsId(item.goodsId)">
                 <img :src="item.coverImgUrl" alt @load="onImageLoad()" />
                 <div class="describe">
                   <span>推荐</span>
@@ -142,9 +139,11 @@ export default {
         }
       }
     },
-    getGoodsId(x){
-      this.$store.commit('gerGoodsId',{ran:x})
-      this.$router.push({path:'/goodsData'})
+    getGoodsId(x) {
+      this.$router.push({
+        path: "/goodsData",
+        query: { obj: x }
+      });
     }
   },
   created() {
@@ -168,7 +167,7 @@ export default {
     //推荐商品列表
     getRecommendGoodsList().then(res => {
       this.recommendGoodsList = res.rows;
-      this.ulLeftList.push(this.recommendGoodsList.shift());
+      this.ulLeftList.push(this.recommendGoodsList.shift()); //取出数组的第一个元素
     });
   }
 };
@@ -244,7 +243,6 @@ export default {
               font-size: 13px;
               line-height: 13px;
               margin: -7px 0 0 5px;
-              
             }
             .price {
               font-size: 13px;

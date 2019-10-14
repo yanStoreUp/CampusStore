@@ -17,16 +17,15 @@
     <transition v-on:before-enter="beforeEnter" v-on:enter="enter">
       <div v-show="flag" class="cir1"></div>
     </transition>
-    <div @click="add(sortGoods.goodsId)" id="addToCar">
+    <div :plain="true" @click="open(sortGoods.goodsId)" id="addToCar">
       <span id="font" class="iconfont icon-gouwuche"></span>
     </div>
-    <el-alert v-show="flag&&show" id="addSuccess" title="加入购物车成功" type="success"></el-alert>
-    <el-alert v-show="flag&&!show" id="addFail" title="我已经在购物车里了，要是更改数量就去购物车里更改吧" type="warning"></el-alert>
   </div>
 </template>
 <script>
 import { MessageBox } from "mint-ui";
-import {shopCarAdd} from '../../services/shopcar'
+import {shopCarAdd} from '@/services/shopcar'
+import {goodsDatail} from '@/services/goodsData'
 export default {
   data() {
     return {
@@ -40,27 +39,32 @@ export default {
     };
   },
   created(){
-    this.sortGoods = this.$route.query.obj
-    console.log(typeof this.sortGoods)
-    if(typeof this.sortGoods == 'string'){
-      this.$router.push({
-        path:'/sort'
-      })
-    }
+    goodsDatail(this.$route.query.id).then(res =>{
+      if(res.code == 0){
+        this.sortGoods =res.data
+      }else{
+        alert("加载失败！")
+      }
+    })
+    // this.sortGoods = this.$route.query.obj
+    // if(typeof this.sortGoods == 'string'){
+    //   this.$router.push({
+    //     path:'/sort'
+    //   })
+    // }
   },
   methods: {
-    back(){
-      this.$router.go(-1)
-    },
-    add(x) {
-      this.flag = true;
+     open(x) {
       shopCarAdd(x).then(res=>{
         if(res.code == 0){
-          this.show = true;
+          this.$message('添加购物车成功');
         }else{
-          this.show = false;
+          this.$message('我已经在购物车里了，要是更改数量就去购物车里更改吧');
         }
       })
+      },
+    back(){
+      this.$router.go(-1)
     },
     // 添加购物车时的动画
     beforeEnter(el) {

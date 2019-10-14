@@ -5,14 +5,14 @@
     <div @click="back()" id="back">&lt;返回</div>
     <!-- 左边分类 -->
     <div id="left">
-      <li @click="getSort(value)" class="leftSort" ref="leftSort" v-for="value in sortLeftData" :key="value.id">{{value.name}}</li>
+      <li @click="getSort(value)" class="leftSort" v-for="value in sortLeftData" :key="value.id">{{value.name}}</li>
     </div>
     <!-- 右边分类对应的商品展示 -->
     <div id="right">
       <!-- 商品分类的名称 -->
       <div class="goodsSort">{{sortName}}</div>
       <!-- 商品展示卡片 -->
-      <div @click="getGoodsId(value)" class="goodsList" v-for="value in goodsArr" :key="value.id">
+      <div @click="getGoodsId(value.goodsId)" class="goodsList" v-for="value in goodsArr" :key="value.id">
         <!-- 商品图片 -->
         <img  :src=value.coverImgUrl alt="">
         <!-- 商品名称 -->
@@ -48,6 +48,7 @@ export default {
       this.$router.go(-1)
     },
     getSort(x) {
+      // console.log(this.$refs)
       // 初始化分类商品列表
       this.goodsArr = []
       // 获取商品分类名称
@@ -63,6 +64,7 @@ export default {
     },
     //获取商品id放入store中用来渲染商品详情页面
     getGoodsId(x){
+      // console.log(x)
       // this.$store.commit('gerGoodsId',{ran:x})
       this.$router.push({
         path:'/goodsData',
@@ -91,12 +93,11 @@ export default {
   float: left;
   width: 90px;
   li{
+    border-bottom: 1px solid white;
     height: 5vh;
     width: 94%;
     margin: 3px 0 0 3% ;
     background: white;
-    border: 1px solid black;
-    border-radius: 10px;
     text-align: center;
     line-height: 5vh;
   }
