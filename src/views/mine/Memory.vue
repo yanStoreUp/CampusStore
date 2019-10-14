@@ -198,7 +198,7 @@ export default {
   background-color: #EA3D1D;
 }
 .box {
-  margin-top: 60px;
+  padding-top: 60px;
   padding-left: 5px;
   padding-right: 5px;
   #head {

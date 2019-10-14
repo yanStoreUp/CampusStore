@@ -35,6 +35,7 @@
 </template>
 <script>
 import { isNotBlank } from "./utils/commen-util";
+import { gitExamine } from "./services/mine.js"
 export default {
   data() {
     return {
@@ -71,7 +72,26 @@ export default {
         this.title = newVal.meta.title;
       }
     }
-  }
+  },
+
+  
+  mounted() {
+    gitExamine().then(res => {
+      if (res.code == 403) {
+        this.$notify({
+        type: "success",
+        message: "您还未登录哦",
+        duration: 3000
+      });
+      } else {
+        this.$notify({
+        type: "success",
+        message: "欢迎您来到校园商城",
+        duration: 3000
+      });
+      }
+    });
+  },
 };
 </script>
 <style lang="less" scoped>

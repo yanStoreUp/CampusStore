@@ -75,7 +75,7 @@ export default {
 }
 
 .box {
-  margin-top: 40px;
+  padding-top: 40px;
   .logo {
     width: 200px;
     height: 200px;

@@ -64,7 +64,7 @@ export default {
   beforeMount() {
     gitExamine().then(res => {
       isLogon = res.code;
-      if (isLogon == 500) {
+      if (isLogon == 403) {
         this.$notify({
         type: "success",
         message: "请先登录!",
@@ -91,15 +91,12 @@ export default {
 };
 </script>
 <style lang="less">
-// body {
-//     background-image: url("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1570619519934&di=951ac4c170dfe05b759e99b3fb501608&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fblog%2F201409%2F14%2F20140914005104_TsBrF.jpeg")
-// }
 #subject {
   background-color: #ea3d1d;
 }
 
 .box {
-  margin-top: 60px;
+  padding-top: 60px;
   #head {
     width: 150px;
     margin: 5px auto;

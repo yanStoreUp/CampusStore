@@ -263,7 +263,7 @@
         background-color: #EA3D1D;
     }
     .box {
-        margin-top: 50px;
+        padding-top: 50px;
         padding-left: 5px;
         padding-right: 5px;
         #imgs {

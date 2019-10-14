@@ -169,7 +169,7 @@ export default {
 }
 .shopCarGoods {
   height: 20vh;
-  margin: 50px 0px 0 10px;
+  padding: 50px 0px 0 10px;
   .cir {
     display: inline-block;
     width: 6vw;
