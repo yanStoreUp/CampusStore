@@ -78,27 +78,34 @@ export default {
   methods: {
     // 提价订单
     sendOrder() {
-      this.settlement = 0;
-      MessageBox("提示", "结算成功");
-      this.selectedGoodsList.forEach(v => {
-        shopCarDel(v.shoppingCartId).then(res => {
-          // 如果后台购物车商品删除成功操作成功的
-          if (res.code == 0) {
-            shopCarGoods().then(res => {
-              this.inShopCar = res.list;
-            });
-          }
+      var reg = /^((13[0-2])|(15[056])|(18[5-6])|145|176)\d{8}$/;
+      if (reg.test(this.phone) && this.address != "") {
+        this.settlement = 0;
+        MessageBox("提示", "结算成功");
+        this.selectedGoodsList.forEach(v => {
+          shopCarDel(v.shoppingCartId).then(res => {
+            // 如果后台购物车商品删除成功操作成功的
+            if (res.code == 0) {
+              shopCarGoods().then(res => {
+                this.inShopCar = res.list;
+              });
+            }
+          });
         });
-      });
-      let goodsList = JSON.stringify(this.selectedGoodsList);
-      // console.log(goodsList);
-      shopCarSettlementApi(
-        goodsList,
-        this.address,
-        this.phone,
-        this.settlement
-      );
-      this.send = false;
+        let goodsList = JSON.stringify(this.selectedGoodsList);
+        // console.log(goodsList);
+        shopCarSettlementApi(
+          goodsList,
+          this.address,
+          this.phone,
+          this.settlement
+        );
+        this.send = false;
+      } else {
+        alert(
+          "信息输入有误！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！"
+        );
+      }
     },
     // 删除商品
     delGoods(x) {
@@ -189,7 +196,7 @@ export default {
   background: rgba(0, 0, 0, 0.5);
   #sendBox {
     width: 90vw;
-    height: 45vh;
+    height: 50vh;
     margin: 18vh 5vw 0;
     background-color: #f2f2f2;
     border-radius: 10px;
@@ -210,12 +217,12 @@ export default {
     }
     #sure {
       position: fixed;
-      top: 70vh;
+      top: 58vh;
       left: calc(50vw - 145px);
     }
     #cancel {
       position: fixed;
-      top: 70vh;
+      top: 58vh;
       left: calc(50vw + 80px);
     }
   }
