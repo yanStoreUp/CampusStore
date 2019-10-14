@@ -78,6 +78,12 @@ function gitOrder () {
     return http.post('/api/shop/shopOrder/site/login-user/list')
 }
 
+// 删除订单
+
+function delOrder (orderId) {
+    return http.get(`/api/shop/shopOrder/user/remove/${orderId}`)
+}
+
 
 export {
     gitEnter,
@@ -89,4 +95,5 @@ export {
     gitavatar,
     gitLogout,
     gitOrder,
+    delOrder,
 }

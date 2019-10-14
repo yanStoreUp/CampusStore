@@ -9,8 +9,8 @@
     <div class="bos">
       <ul>
         <li
-          v-for="(item, index) in list"
-          :class="{ move: candelete.total == item.total }"
+          v-for="item in list"
+          :class="{ move: candelete.orderId == item.orderId }"
           @touchstart="touchStart(item)"
           @touchend="touchEnd(item)"
           :key="item.orderId"
@@ -18,11 +18,13 @@
           <div class="monad">
             <div class="time">
               <span class="createTime">{{ item.createTime }}</span>
-              <span class="status">{{ item.status }}</span>
+              <span class="status" :style="getStatusStyle(item.status)">{{
+                item.statusText
+              }}</span>
             </div>
 
             <div
-              v-for="(goodItem) in item.goodsList"
+              v-for="goodItem in item.goodsList"
               :key="item.orderId + '-' + goodItem.shoppingCartId"
             >
               <div class="goodsList">
@@ -49,7 +51,7 @@
           {{ item.list.intro }} -->
           </div>
 
-          <div class="del" @click="deleteItem(index)">删除</div>
+          <div class="del" @click="deleteItem(item.orderId)">删除</div>
         </li>
       </ul>
     </div>
@@ -58,7 +60,7 @@
 
 
 <script>
-import { gitOrder } from "@/services/mine.js";
+import { gitOrder, delOrder } from "@/services/mine.js";
 var obj;
 var newArr = [];
 export default {
@@ -67,6 +69,7 @@ export default {
       // 数据
       list: [],
       newArr: [],
+      status: "",
       clientNum: {}, // 记录开始滑动（x1）,结束滑动（x2）的鼠标指针的位置
       candelete: {} // 滑动的item
     };
@@ -76,15 +79,38 @@ export default {
      * 删除item
      * index是下标
      */
-    deleteItem(index) {
-      this.list.splice(index, 1);
+    deleteItem(orderId) {
+      this.$confirm("此操作将永久删除该订单, 是否继续?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+        customClass: "confirm-custom"
+      }).then(() => {
+        delOrder(orderId).then(res => {
+          // 渲染列表
+          if (res.code == 0) {
+            this.$notify({
+              type: "success",
+              message: "删除成功!"
+            });
+
+            this.initData();
+          } else {
+            this.$notify({
+              type: "success",
+              message: "订单不可删除"
+            });
+          }
+        });
+      });
+
       // splice方法是删除数组某条数据，或者向某个位置添加数据
     },
     touchStart(item) {
       let touchs = event.changedTouches[0];
       // 记录开始滑动的鼠标位置
       this.clientNum.x1 = touchs.pageX;
-      this.candelete = {};
+      // this.candelete = {};
     },
     touchEnd(item) {
       let touchs = event.changedTouches[0];
@@ -105,22 +131,62 @@ export default {
         event.preventDefault();
         this.candelete = {};
       }
+    },
+    getStatusStyle(status) {
+      switch (status) {
+        case "0":
+          return {
+            color: "#ffd600"
+          };
+
+        case "1":
+          return {
+            color: "#36a202"
+          };
+
+        case "2":
+          return {
+            color: "grey"
+          };
+
+
+        default:
+          return {
+            color: "red"
+          };
+      }
+    },
+    initData() {
+      gitOrder().then(res => {
+        this.list = res.rows;
+
+        for (let item of this.list) {
+          item.goodsList = JSON.parse(item.goodsList);
+          this.newArr.push(item);
+          switch (item.status) {
+            case "0":
+              item.statusText = "已下单";
+
+              break;
+            case "1":
+              item.statusText = "已完成";
+              break;
+            case "2":
+              item.statusText = "已取消";
+
+              break;
+            default:
+              item.statusText = "订单异常";
+          }
+          // console.log(item.goodsList)
+          // orderId = item.goodsList.
+        }
+      });
     }
   },
 
   beforeMount() {
-    gitOrder().then(res => {
-      this.list = res.rows;
-
-      for (let item of this.list) {
-        item.goodsList = JSON.parse(item.goodsList);
-        this.newArr.push(item);
-      }
-    });
-  },
-  mounted() {
-    if (0) {
-    }
+    this.initData();
   }
 };
 </script>
@@ -134,6 +200,10 @@ export default {
 }
 #subject {
   background-color: #ea3d1d;
+}
+
+.confirm-custom {
+  width: auto !important;
 }
 
 li {
@@ -155,8 +225,16 @@ li {
     .status {
       color: #ea3d1d;
       display: inline-block;
-      float: right;
       padding-right: 20px;
+    }
+    .active1 {
+      color: orange;
+    }
+    .active2 {
+      color: green;
+    }
+    .active3 {
+      color: gray;
     }
   }
   .createTime {
@@ -207,5 +285,9 @@ li.move {
   color: #fff;
   background-color: #ea3d1d;
   transform: translateX(60px); /*默认x轴位移60px，使其隐藏*/
+  display: flex;
+  align-items:center;
+  justify-content: center;
+
 }
 </style>
