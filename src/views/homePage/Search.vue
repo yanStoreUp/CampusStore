@@ -5,20 +5,20 @@
       <mt-search v-model="value" cancel-text="取消" placeholder="搜索"></mt-search>
     </div>-->
     <div id="search">
-      <input type="text" v-model="myVal" placeholder="搜索" />
+      <input ref="searchInput" type="text" v-model="myVal" placeholder="搜索" />
       <i class="iconfont icon-fangdajing"></i>
       <div id="searchButton" @click="search">搜索</div>
     </div>
 
     <!-- 搜索列表 -->
     <ul id="searchList" v-for="item in searchList" :key="item.goodsId">
-      <li @click="getGoodsId(item)" ref="searchListLi">
+      <li @click="getGoodsId(item.goodsId)" ref="searchListLi">
         {{item.name}}
         <i class="iconfont icon-arrow-left-top" @click="textUp(item.name)"></i>
       </li>
     </ul>
 
-    <div id="content" v-show="b">
+    <div id="content" v-show="isDisplay">
       <!-- 历史记录 -->
       <div id="historyRecord">
         <span id="historyRecordTitle">历史记录</span>
@@ -35,7 +35,7 @@
           <li
             v-for="item in searchFoundList"
             :key="item.goodsId"
-            @click="getGoodsId(item)"
+            @click="getGoodsId(item.goodsId)"
           >{{item.name}}</li>
         </ul>
       </div>
@@ -70,40 +70,38 @@ export default {
       searchList: [],
       //搜索发现列表
       searchFoundList: [],
-      b: true,
+      //历史记录是否展示
+      isDisplay: true,
       commentList: []
     };
   },
   created() {
-    //获取轮播图列表
+    //获取轮播图列表渲染在 搜索发现
     getSearchFoundListList().then(res => {
       this.searchFoundList = res.rows;
     });
+    //本的缓存
     this.commentList = JSON.parse(localStorage.getItem("comment") || "[]");
-    this.commentList = [...new Set(this.commentList)]
+    this.commentList = [...new Set(this.commentList)]; //数组去重
+  },
+  mounted() {
+    this.$refs.searchInput.focus();
   },
   watch: {
     myVal(newVal) {
       if (newVal != "") {
-        this.b = false;
+        this.isDisplay = false;
       } else {
-        this.b = true;
+        this.isDisplay = true;
       }
     }
   },
   methods: {
     //搜索按钮
     search() {
-      // var li = document.createElement("li");
-      // li.innerHTML = this.myVal;
-
-      this.commentList.push(this.myVal)
+      this.commentList.push(this.myVal);
       localStorage.setItem("comment", JSON.stringify(this.commentList));
 
-      // let set = new Set(this.commentList.push(this.myVal))
-      // localStorage.setItem("comment", JSON.stringify(set));
-
-      // this.$refs.ulHistory.appendChild(li);
       getSearchResultList(this.myVal).then(res => {
         this.searchList = res.rows;
       });
@@ -111,16 +109,19 @@ export default {
     //垃圾桶
     empty() {
       localStorage.clear();
+      //清空localStorage之后渲染历史列表才会清空
       this.commentList = JSON.parse(localStorage.getItem("comment") || "[]");
     },
     //列表右侧箭头
-    textUp(a) {
-      this.myVal = a;
+    textUp(parameter) {
+      this.myVal = parameter;
     },
     //商品详情
     getGoodsId(x) {
-      this.$store.commit("gerGoodsId", { ran: x });
-      this.$router.push({ path: "/goodsData" });
+      this.$router.push({
+        path: "/goodsData",
+        query: { obj: x }
+      });
     }
   }
 };
@@ -142,6 +143,9 @@ export default {
     margin: 8px 0;
     margin-left: 10px;
     padding-left: 35px;
+    &:focus {
+      outline: none;
+    }
   }
   //放大镜
   i {
