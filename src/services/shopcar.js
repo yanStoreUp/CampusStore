@@ -16,11 +16,19 @@ function shopCarDel(ids){
 function shopCarChange(id,num){
     return http.get(`/api/shop/shopShoppingCart/site/change/num/${id}/${num}`);
 }
-
+function shopCarSettlementApi(goodsList,address,mobile,total){
+    let formdata = new FormData()
+    formdata.append('goodsList',`${goodsList}`)
+    formdata.append('address',`${address}`)
+    formdata.append('mobile',`${mobile}`)
+    formdata.append('total',`${total}`)
+    return http.post('/api/shop/shopOrder/site/add',formdata)
+}
 
 export {
     shopCarAdd,
     shopCarGoods,
     shopCarDel,
-    shopCarChange
+    shopCarChange,
+    shopCarSettlementApi
 }

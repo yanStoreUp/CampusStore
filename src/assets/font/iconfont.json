@@ -6,6 +6,20 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "21156",
+      "name": "点击",
+      "font_class": "dianji",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
+      "icon_id": "485800",
+      "name": "垃圾桶",
+      "font_class": "lajitong",
+      "unicode": "e622",
+      "unicode_decimal": 58914
+    },
+    {
       "icon_id": "926959",
       "name": "二手设备",
       "font_class": "ershoushebei",
@@ -27,18 +41,32 @@
       "unicode_decimal": 58941
     },
     {
-      "icon_id": "1638357",
-      "name": "首页",
-      "font_class": "shouye",
-      "unicode": "e615",
-      "unicode_decimal": 58901
-    },
-    {
       "icon_id": "2273360",
       "name": "照相机",
       "font_class": "shumajiadian",
       "unicode": "e689",
       "unicode_decimal": 59017
+    },
+    {
+      "icon_id": "2290383",
+      "name": "左上箭头",
+      "font_class": "arrow-left-top",
+      "unicode": "e782",
+      "unicode_decimal": 59266
+    },
+    {
+      "icon_id": "2681693",
+      "name": "火",
+      "font_class": "huo",
+      "unicode": "e606",
+      "unicode_decimal": 58886
+    },
+    {
+      "icon_id": "2849458",
+      "name": "热门",
+      "font_class": "remen",
+      "unicode": "e647",
+      "unicode_decimal": 58951
     },
     {
       "icon_id": "3670102",
@@ -55,13 +83,6 @@
       "unicode_decimal": 58896
     },
     {
-      "icon_id": "5439974",
-      "name": "我的",
-      "font_class": "wode",
-      "unicode": "e63a",
-      "unicode_decimal": 58938
-    },
-    {
       "icon_id": "7100359",
       "name": "商品分类",
       "font_class": "shangpinfenlei",
@@ -69,11 +90,25 @@
       "unicode_decimal": 59172
     },
     {
-      "icon_id": "7463927",
+      "icon_id": "7551367",
       "name": "我的",
-      "font_class": "wode1",
-      "unicode": "e626",
-      "unicode_decimal": 58918
+      "font_class": "wode2",
+      "unicode": "e67a",
+      "unicode_decimal": 59002
+    },
+    {
+      "icon_id": "8862846",
+      "name": "shouye",
+      "font_class": "shouye1",
+      "unicode": "e771",
+      "unicode_decimal": 59249
+    },
+    {
+      "icon_id": "11238650",
+      "name": "热门",
+      "font_class": "bianpinghuatubiaosheji-",
+      "unicode": "e62b",
+      "unicode_decimal": 58923
     }
   ]
 }
