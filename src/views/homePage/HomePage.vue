@@ -18,7 +18,7 @@
 
     <div id="streeMain">
       <div id="content">
-        <!-- 二手商品调接口 -->
+        <!-- 二手商品 -->
         <div id="oldGoods">
           <router-link to="/oldGoods">
             <div class="oldGoodsTitle">
@@ -34,7 +34,6 @@
                     <img :src="item.coverImgUrl" alt />
                     <div class="describe">{{item.name}}</div>
                     <div class="price">
-                      <!-- <span class="recommend">抢</span> -->
                       <span style="font-size:8px;margin-right:-3px">￥</span>
                       {{item.price}}
                     </div>
@@ -82,24 +81,6 @@
             </ul>
           </div>
         </div>
-
-        <!-- 刷新 -->
-        <!-- <mt-loadmore
-          :top-method="loadTop"
-          :bottom-method="loadBottom"
-          :bottom-all-loaded="allLoaded"
-          ref="loadmore"
-        >-->
-        <!-- <ul>
-          <li v-for="item in oldGoods" :key="item.goodsId">
-            <img :src="item.bannerUrl" alt />
-          </li>
-          <li v-for="item in goodsList" :key="item.goodsId">
-            <img :src="item.cov
-            erImgUrl" alt />
-          </li>
-        </ul>-->
-        <!-- </mt-loadmore> -->
       </div>
     </div>
   </div>

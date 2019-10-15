@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const instance = axios.create({
-    timeout: 3000,
+    timeout: 10000,
     headers: {
         "X-Requested-With" : 'XMLHttpRequest'
 

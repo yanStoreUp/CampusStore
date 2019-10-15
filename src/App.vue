@@ -33,7 +33,7 @@
   </div>
 </template>
 <script>
-import { isNotBlank } from "./utils/commen-util";
+
 import { gitExamine } from "./services/mine.js"
 export default {
   data() {
@@ -63,11 +63,6 @@ export default {
         this.$router.push({ path: "/shopCar" });
       } else if (newVal == "Mine" && this.$route.push != "/mine") {
         this.$router.push({ path: "/mine" });
-      }
-    },
-    $router(newVal) {
-      if (isNotBlank(newVal.meta.title)) {
-        this.title = newVal.meta.title;
       }
     }
   },

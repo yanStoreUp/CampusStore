@@ -1,9 +1,5 @@
 <template>
   <div>
-    <!-- 搜索框 -->
-    <!-- <div @click="search">
-      <mt-search v-model="value" cancel-text="取消" placeholder="搜索"></mt-search>
-    </div>-->
     <div id="search">
       <input ref="searchInput" type="text" v-model="myVal" placeholder="搜索" />
       <i class="iconfont icon-fangdajing"></i>
@@ -44,18 +40,6 @@
 </template>
 
 <script>
-// 设定一个localstroage的key
-// let commentList = JSON.parse（localStroage.getItem（'commentList'）|| '[]“）
-// //本地数据为空时就是空数组
-// 将要保存的数据出进去
-// commentLIst.push（bjj）
-// 保存到localStroage
-// localStroage.setItem('comment',JSON.stringify(commentList))
-
-// var imgs = obj_mainform.archivesId  //声明个变量存储下数据
-// localStorage.setItem('key',imgs);  //将变量imgs存储到name字段
-
-// var naid = localStorage.getItem("key"); //获取指定key本地存储的值
 
 import {
   getSearchResultList,
@@ -109,7 +93,7 @@ export default {
     //垃圾桶
     empty() {
       localStorage.clear();
-      //清空localStorage之后渲染历史列表才会清空
+      //清空localStorage之后修改commentList
       this.commentList = JSON.parse(localStorage.getItem("comment") || "[]");
     },
     //列表右侧箭头
