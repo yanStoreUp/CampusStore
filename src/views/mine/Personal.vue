@@ -27,27 +27,27 @@
 
       <!-- 账户名字 -->
       <p class="birthday loginName">
-        <span class="left">登录账户:</span>
+        <span class="left">登录账户: </span>
         <span class="matter">{{ msgloginName }}</span>
       </p>
       <p class="birthday userName">
-        <span class="left">昵称:</span>
+        <span class="left">昵称: </span>
         <span class="matter">{{ msguserName }}</span>
       </p>
       <p class="birthday email">
-        <span class="left">邮箱</span>
+        <span class="left">邮箱: </span>
         <span class="matter">{{ msgemail }}</span>
       </p>
       <p class="birthday phonenumber">
-        <span class="left">电话号码</span>
+        <span class="left">电话号码: </span>
         <span class="matter">{{ msgphonenumber }}</span>
       </p>
       <p class="birthday sex">
-        <span class="left">性别</span>
+        <span class="left">性别: </span>
         <span class="matter">{{ msgsex }}</span>
       </p>
       <p class="birthday remark">
-        <span class="left">个性签名</span>
+        <span class="left">个性签名: </span>
         <span class="matter">{{ msgremark }}</span>
       </p>
       <router-link to="/change">
