@@ -39,7 +39,6 @@ export default {
     };
   },
   created(){
-    console.log(this.$route.query)
     goodsDatail(this.$route.query.obj).then(res =>{
       if(res.code == 0){
         this.sortGoods =res.data

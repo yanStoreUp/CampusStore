@@ -40,6 +40,11 @@
         <el-button @click="sendOrder()" id="cancel" type="success" round>确定</el-button>
       </div>
     </div>
+    <div id="delSure" v-show="del">
+        <h1>不想要我了吗QAQ</h1>
+        <el-button @click="del = false" id="endSure" type="success" round>心软取消</el-button>
+        <el-button @click="delSure()" id="endCancel" type="info" round>残忍确定</el-button>
+    </div>
   </div>
 </template>
 <script>
@@ -54,6 +59,8 @@ import sort from "../../services/sort";
 export default {
   data() {
     return {
+      id:0,
+      del:false,
       phone: "",
       address: "",
       send: false,
@@ -80,7 +87,6 @@ export default {
     sendOrder() {
       var reg = /^((13[0-2])|(15[056])|(18[5-6])|145|176)\d{8}$/;
       if (reg.test(this.phone) && this.address != "") {
-        this.settlement = 0;
         MessageBox("提示", "结算成功");
         this.selectedGoodsList.forEach(v => {
           shopCarDel(v.shoppingCartId).then(res => {
@@ -94,26 +100,35 @@ export default {
         });
         let goodsList = JSON.stringify(this.selectedGoodsList);
         // console.log(goodsList);
-        shopCarSettlementApi(
-          goodsList,
-          this.address,
-          this.phone,
-          this.settlement
-        );
+          shopCarSettlementApi(
+            goodsList,
+            this.address,
+            this.phone,
+            this.settlement
+          );
         this.send = false;
+        this.settlement = 0;
       } else {
         alert(
-          "信息输入有误！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！"
+          "信息输入有误！"
         );
       }
     },
     // 删除商品
     delGoods(x) {
-      // console.log(x)
-      shopCarDel(this.inShopCar[x].shoppingCartId).then(res => {
+      this.del = true;
+      this.id = x;
+    },
+    delSure(){
+      shopCarDel(this.inShopCar[this.id].shoppingCartId).then(res => {
         // 如果后台购物车商品删除成功操作成功的
-        if (res.code == 0) this.inShopCar.splice(x, 1);
+        if (res.code == 0) this.inShopCar.splice(this.id, 1);
       });
+      this.del = false;
+      this.settlement = 0;
+        this.selectedGoodsList.forEach(v => {
+          this.settlement += v.price * v.num;
+        });
     },
     // 返回上一级
     back() {
@@ -122,9 +137,8 @@ export default {
     // 购物车减少货物
     shopCarAdd(x) {
       if (this.inShopCar[x].num <= 1) {
-        shopCarDel(this.inShopCar[x].shoppingCartId).then(res => {
-          if (res.code == 0) this.inShopCar.splice(x, 1);
-        });
+        this.inShopCar[x].num = 1;
+        alert('别点了再点就没了！')
       } else {
         this.inShopCar[x].num -= 1;
         shopCarChange(this.inShopCar[x].shoppingCartId, this.inShopCar[x].num);
@@ -140,7 +154,7 @@ export default {
       this.flag = !this.flag;
       if (!this.flag) {
         // 若果点了全选 就将购物车里所有对象值放入选中清单
-        this.selectedGoodsList = this.inShopCar;
+        [...this.selectedGoodsList] = [...this.inShopCar];
         this.selectedGoodsList.forEach(v => {
           // 将所有商品表示选中的标志改成选中
           v.selected = true;
@@ -160,7 +174,7 @@ export default {
       //判断代表选中货物的数组里是否存在所操作货物
       if (
         this.selectedGoodsList.some(v => {
-          return v === x;
+          return v.goodsId === x.goodsId;
         })
       ) {
         //如果有就标记一下表示取消并且去掉
@@ -168,6 +182,7 @@ export default {
         //去掉操作货物
         let a = this.selectedGoodsList.indexOf(x);
         this.selectedGoodsList.splice(a, 1);
+
       } else {
         //如果没有就加入列表并且标记一下表示选中
         x.selected = true;
@@ -186,6 +201,30 @@ export default {
 };
 </script>
 <style lang="less">
+#delSure{
+  position: fixed;
+  top: 30vh;
+  left: 10vw;
+  z-index:2000;
+  width: 80vw;
+  height: 30vh;
+  background: rgba(0, 0, 0, 0.5);
+  h1{
+    color: white;
+    text-align: center;
+    line-height: 120px;
+  }
+  #endSure{
+    position: fixed;
+    top: 50vh;
+    left: 20vw;
+  }
+  #endCancel{
+    position: fixed;
+    top: 50vh;
+    left: 55vw;
+  }
+}
 #send {
   position: fixed;
   top: 0;
