@@ -243,6 +243,7 @@ li {
 
   .goodsList {
     img {
+      height: 85px;
       width: 80px;
       margin-top: 5px;
     }

@@ -83,7 +83,9 @@ export default {
   methods: {
     //搜索按钮
     search() {
-      this.commentList.push(this.myVal);
+      if (this.commentList.indexOf(this.myVal) == -1) {
+        this.commentList.push(this.myVal);
+      }
       localStorage.setItem("comment", JSON.stringify(this.commentList));
 
       getSearchResultList(this.myVal).then(res => {
