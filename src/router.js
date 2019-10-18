@@ -25,6 +25,8 @@ import Mine from './views/mine/Mine.vue';
 import Change from './views/mine/Change.vue';
 // 忘记密码
 import Memory from './views/mine/Memory.vue';
+//首页
+import FirstAnimation from './views/homePage/firstAnimation.vue'
 
 
 
@@ -32,7 +34,7 @@ import Memory from './views/mine/Memory.vue';
 const router = new VueRouter({
   routes: [{
     path: '/',
-    redirect: '/HomePage'
+    component: FirstAnimation
   }, {
     path: '/homePage',
     component: HomePage,
