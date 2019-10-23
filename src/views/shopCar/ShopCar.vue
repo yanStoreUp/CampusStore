@@ -193,10 +193,16 @@ export default {
     }
   },
   created() {
-    // 将购物车商品从后台取出放入列表中
-    shopCarGoods().then(res => {
-      this.inShopCar = res.list;
-    });
+    shopCarGoods().then(res =>{
+      if(res.code === '403'){
+        MessageBox("提示", "登录才查看您的购物车哦");
+      }else{
+        // 将购物车商品从后台取出放入列表中
+          shopCarGoods().then(res => {
+            this.inShopCar = res.list;
+          });
+      }
+    })
   }
 };
 </script>

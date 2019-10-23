@@ -1,6 +1,6 @@
 <template>
   <div class="loader">
-    <router-link to="/HomePage" tag="div" class="text">进入我的购物篮</router-link>    
+    <div @click="showFooter" to="/HomePage" tag="div" class="text">进入我的购物篮</div>    
     <div class="horizontal">
       <div class="circlesup">
         <div class="circle"></div>
@@ -37,7 +37,14 @@
 </template>
 
 <script>
-export default {};
+export default {
+  methods: {
+    showFooter(){
+      this.$router.push({path:'/homePage'})
+      this.$store.commit('changeShow', {show:true})
+    }
+  },
+};
 </script>
 
 <style lang="less">
@@ -51,16 +58,17 @@ body {
 }
 
 .loader {
+  width: 100vw;
+  // height: 100vh;
   position: absolute;
   top: 50%;
-  left: 50%;
+  left: 100%;
   -webkit-transform: translate(-50%, -50%);
   -moz-transform: translate(-50%, -50%);
   -mos-transform: translate(-50%, -50%);
   -o-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   text-align: center;
-  /* disable selection and cursor changes */
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
@@ -75,6 +83,7 @@ body {
   position: absolute;
   left: 0;
   top: 10vh;
+  width: 15px;
   z-index: 2000;
     // -webkit-animation: text 2s infinite forwards;
     // -moz-animation: text 2s infinite forwards;

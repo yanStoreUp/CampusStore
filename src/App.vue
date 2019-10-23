@@ -11,7 +11,7 @@
     </div>
 
     <!--底部导航-->
-    <mt-tabbar v-model="selected" id="footer">
+    <mt-tabbar v-model="selected" id="footer" v-show = this.$store.state.show>
       <mt-tab-item id="HomePage">
         <!-- <img slot="icon" src="../assets/100x100.png" /> -->
         <span slot="icon" class="iconfont icon-shouye1" style="font-size:"></span>
@@ -39,17 +39,23 @@ export default {
   data() {
     return {
       selected: "HomePage",
-      title: "欢迎来到校园商城"
+      title: "欢迎来到校园商城",
     };
   },
   created() {
-    if (this.$route.path == "/homePage") {
+    if(this.$route.path == "/"){
+      this.$store.commit('changeShow', {show:false})
+    }else if (this.$route.path == "/homePage") {
+      this.show = true;
       this.selected = "HomePage";
     } else if (this.$route.path == "/sort") {
+      this.show = false 
       this.selected = "Sort";
     } else if (this.$route.path == "/shopCar") {
+      this.show = true
       this.selected = "ShopCar";
     } else if (this.$route.path == "/mine") {
+      this.show = true
       this.selected = "Mine";
     }
   },
