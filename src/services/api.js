@@ -4,8 +4,9 @@ const instance = axios.create({
     timeout: 10000,
     headers: {
         "X-Requested-With" : 'XMLHttpRequest'
-
-    }
+    },
+    baseURL:'http://59.111.92.205:8088',
+    withCredentials:true
 });
 
 // 添加请求拦截器

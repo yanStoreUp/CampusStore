@@ -1,7 +1,7 @@
 <template>
   <div>
     <mt-header fixed title="我的" id="subject">
-      <router-link to="/" slot="left">
+      <router-link to="/homePage" slot="left">
         <mt-button icon="back">返回</mt-button>
       </router-link>
     </mt-header>

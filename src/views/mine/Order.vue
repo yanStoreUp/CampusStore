@@ -191,7 +191,7 @@ export default {
 };
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 .bos {
   background: #d9d9d93b;
   padding-left: 5px;

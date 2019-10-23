@@ -1,7 +1,8 @@
+<script src="../../services/api.js"></script>
 <template>
   <div>
     <mt-header fixed title="登录" id="subject">
-      <router-link to="/" slot="left">
+      <router-link to="/mine" slot="left">
         <mt-button icon="back">返回</mt-button>
       </router-link>
     </mt-header>
@@ -47,7 +48,7 @@ export default {
             message: "欢迎你," + this.username + "!",
             duration: 3000
           });
-          this.$router.replace("/");
+          this.$router.replace("/mine");
         } else {
           this.$message({
             type: "error",
@@ -80,6 +81,7 @@ export default {
     width: 200px;
     height: 200px;
     margin: 20px auto;
+    
     img {
       width: 200px;
       height: 200px;
