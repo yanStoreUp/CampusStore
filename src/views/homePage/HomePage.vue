@@ -223,7 +223,7 @@ export default {
             .describe {
               font-size: 13px;
               line-height: 13px;
-              margin: -7px 0 0 5px;
+              margin: 0px 0 0 5px;
             }
             .price {
               font-size: 13px;
@@ -275,7 +275,7 @@ export default {
             .describe {
               font-size: 13px;
               line-height: 13px;
-              margin: -7px 0 0 5px;
+              margin: 0px 0 0 5px;
               span {
                 background-color: #f70331;
                 padding: 1px 1px;
@@ -314,7 +314,7 @@ export default {
             .describe {
               font-size: 13px;
               line-height: 13px;
-              margin: -7px 0 0 5px;
+              margin: 0px 0 0 5px;
               span {
                 background-color: #f70331;
                 padding: 1px 1px;
