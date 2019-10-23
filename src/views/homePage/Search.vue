@@ -1,8 +1,11 @@
 <template>
   <div>
     <div id="search">
+      <router-link to="/homePage">
+        <i id="leftArrow" class="iconfont icon-zuojiantou"></i>
+      </router-link>
       <input ref="searchInput" type="text" v-model="myVal" placeholder="搜索" />
-      <i class="iconfont icon-fangdajing"></i>
+      <i id="magnifyingGlass" class="iconfont icon-fangdajing"></i>
       <div id="searchButton" @click="search">搜索</div>
     </div>
 
@@ -40,7 +43,6 @@
 </template>
 
 <script>
-
 import {
   getSearchResultList,
   getSearchFoundListList
@@ -117,14 +119,20 @@ export default {
 #search {
   height: 56px;
   background-color: #d9d9d9;
-
+  #leftArrow {
+    float: left;
+    position: relative;
+    left: 5px;
+    top: 16px;
+    font-size: 20px;
+  }
   input {
     border-radius: 20px;
     font-size: 16px;
     border: 2px solid #fd5d1c;
     position: relative;
     float: left;
-    width: 65%;
+    width: 59%;
     height: 33px;
     margin: 8px 0;
     margin-left: 10px;
@@ -134,12 +142,12 @@ export default {
     }
   }
   //放大镜
-  i {
+  #magnifyingGlass {
     font-size: 22px;
     color: #d9d9d9;
     position: absolute;
     top: 15px;
-    left: 20px;
+    left: 38px;
   }
   //搜索按钮
   #searchButton {

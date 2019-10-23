@@ -40,7 +40,7 @@
 export default {};
 </script>
 
-<style lang="less" >
+<style lang="less">
 * {
   margin: 0em;
   padding: 0em;
@@ -48,13 +48,6 @@ export default {};
 
 body {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-  // background: #403833;
-  // font-family: "Open Sans";
-  // font-weight: 100;
-  // color: #f2f2f2;
-  // font-size: 100%;
-  // margin: 0em;
-  // padding: 0em;
 }
 
 .loader {

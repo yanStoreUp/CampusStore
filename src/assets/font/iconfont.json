@@ -41,6 +41,13 @@
       "unicode_decimal": 58941
     },
     {
+      "icon_id": "1518005",
+      "name": "左箭头",
+      "font_class": "zuojiantou",
+      "unicode": "e65a",
+      "unicode_decimal": 58970
+    },
+    {
       "icon_id": "2273360",
       "name": "照相机",
       "font_class": "shumajiadian",

@@ -213,7 +213,7 @@ export default {
 
           li {
             width: 100%;
-            height: 130px;
+            height: 116px;
             padding: 4%;
             img {
               width: 100%;
