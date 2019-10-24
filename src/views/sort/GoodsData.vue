@@ -125,8 +125,8 @@ export default {
 }
 #addToCar {
   position: fixed;
-  top: calc(100vh - 135px);
-  left: calc(100vw - 80px);
+  bottom: 135px;
+  right: 0;
   width: 80px;
   height: 80px;
   background: #ea5f5a;

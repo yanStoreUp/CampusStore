@@ -5,7 +5,7 @@
     <!-- 搜索 -->
     <div id="search">
       <router-link to="/search">
-        <mt-search placeholder="搜索" autofocus></mt-search>
+        <mt-search placeholder="搜索"></mt-search>
       </router-link>
     </div>
 

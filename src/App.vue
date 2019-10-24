@@ -97,7 +97,9 @@ export default {
 .main {
   width: 100%;
   overflow-x: hidden;
-  height: calc(100vh - 55px); //减去底部的高度
+  // height: calc(100vh - 55px); //减去底部的高度
+  padding-bottom:55px;
+  // margin-bottom: 100px
 }
 .app-router-enter,
 .app-router-leave-to {
@@ -133,7 +135,7 @@ export default {
 //底部导航
 #footer {
   position: fixed; 
-  top: calc(100vh - 55px);
+  bottom:0;
   left: 0;
   span {
     font-size: 20px;

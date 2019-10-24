@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="height = '100vh'">
     <mt-header fixed title="购物车" id="top"></mt-header>
     <div @click="back()" id="back">&lt;返回</div>
     <div class="shopCarGoods">
@@ -287,7 +287,7 @@ export default {
   background: #ea5f5a;
 }
 .shopCarGoods {
-  height: 20vh;
+  // height: 20vh;
   padding: 50px 0px 0 10px;
   .cir {
     display: inline-block;
@@ -318,6 +318,7 @@ export default {
       height: 18vh;
     }
     .title {
+      margin-top: 20px;
       width: 30vw;
       p {
         font-size: 4vw;
@@ -337,24 +338,24 @@ export default {
 }
 .footer {
   width: 100vw;
-  height: 10vh;
+  height: 40px;
   background: #ea5f5a;
   position: fixed;
-  top: calc(90vh - 55px);
+  bottom:55px;
   left: 0;
   span {
-    height: 10vh;
-    line-height: 10vh;
-    font-size: 25px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 15px;
   }
   .Settlement {
     float: right;
     width: 40vw;
-    height: 10vh;
+    height: 40px;
     background: skyblue;
-    font-size: 25px;
+    font-size: 15px;
     color: white;
-    line-height: 10vh;
+    line-height: 40px;
     text-align: center;
     font-weight: bold;
   }
